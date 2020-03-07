@@ -1,0 +1,6 @@
+framework module Pods_IMC_HR {
+  umbrella header "Pods-IMC-HR-umbrella.h"
+
+  export *
+  module * { export * }
+}

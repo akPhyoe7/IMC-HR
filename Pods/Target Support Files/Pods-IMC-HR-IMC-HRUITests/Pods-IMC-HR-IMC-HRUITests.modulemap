@@ -1,0 +1,6 @@
+framework module Pods_IMC_HR_IMC_HRUITests {
+  umbrella header "Pods-IMC-HR-IMC-HRUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
