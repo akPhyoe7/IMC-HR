@@ -9,7 +9,15 @@
 import UIKit
 
 class DashboardViewController: UIViewController {
-
+    
+    var dashboardItems : [dashboardItem] = [
+        dashboardItem(iconImg: "icon_attendance", itemLabel: "Attendance"),
+        dashboardItem(iconImg: "icon_leave", itemLabel: "Leave"),
+        dashboardItem(iconImg: "icon_leaveapproval", itemLabel: "Leave Approval"),
+        dashboardItem(iconImg: "icon_payslip", itemLabel: "Payslip"),
+        dashboardItem(iconImg: "icon_profile", itemLabel: "Profile"),
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ///hide shadow under the navigation bar and change bar text color
@@ -27,3 +35,18 @@ class DashboardViewController: UIViewController {
     }
 }
 
+extension DashboardViewController {
+    
+}
+
+// MARK:- Dashboard Items
+// dashboard items struct
+public struct dashboardItem {
+    public let iconImg : String
+    public let itemLabel : String
+    
+    public init(iconImg : String, itemLabel : String) {
+        self.iconImg = iconImg
+        self.itemLabel = itemLabel
+    }
+}
