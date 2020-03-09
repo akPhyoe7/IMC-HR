@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomAlertView" customModule="IMC_HR" customModuleProvider="target">
+            <connections>
+                <outlet property="backgroundView" destination="sJE-cq-ukU" id="qx3-qz-dNY"/>
+                <outlet property="frontView" destination="H8i-1g-bhe" id="UWk-yc-HD1"/>
+                <outlet property="frontViewHeight" destination="AKo-mE-1l3" id="bSZ-C9-Eoa"/>
+                <outlet property="parientView" destination="rOC-oA-tar" id="o2D-sa-t3c"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="rOC-oA-tar">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJE-cq-ukU">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H8i-1g-bhe" customClass="DesignableView" customModule="SmartAppDemo" customModuleProvider="target">
+                    <rect key="frame" x="65.5" y="263.5" width="244" height="140"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="140" id="AKo-mE-1l3"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="H8i-1g-bhe" firstAttribute="centerX" secondItem="rOC-oA-tar" secondAttribute="centerX" id="1gb-UA-Miv"/>
+                <constraint firstItem="sJE-cq-ukU" firstAttribute="leading" secondItem="rOC-oA-tar" secondAttribute="leading" id="33n-UU-Qic"/>
+                <constraint firstAttribute="bottom" secondItem="sJE-cq-ukU" secondAttribute="bottom" id="AND-yh-rGf"/>
+                <constraint firstItem="sJE-cq-ukU" firstAttribute="top" secondItem="rOC-oA-tar" secondAttribute="top" id="Miu-qQ-9wQ"/>
+                <constraint firstItem="tmv-1A-0MU" firstAttribute="trailing" secondItem="sJE-cq-ukU" secondAttribute="trailing" id="hda-An-CWa"/>
+                <constraint firstItem="H8i-1g-bhe" firstAttribute="width" secondItem="rOC-oA-tar" secondAttribute="width" multiplier="0.65" id="o4G-KG-V8d"/>
+                <constraint firstItem="H8i-1g-bhe" firstAttribute="centerY" secondItem="rOC-oA-tar" secondAttribute="centerY" id="xfJ-3Q-JPy"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="tmv-1A-0MU"/>
+            <point key="canvasLocation" x="132" y="243.32833583208398"/>
+        </view>
+    </objects>
+</document>
