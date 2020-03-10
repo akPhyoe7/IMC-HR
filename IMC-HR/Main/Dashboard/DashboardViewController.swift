@@ -27,7 +27,7 @@ class DashboardViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        CustomAlertView.shareInstance.showAlert(message: "Sign In Loading", alertType: CustomAlertView.alertType.loading)
+        CustomAlertView.shareInstance.showAlert(message: "Out of range! Move closer to office and try again.", alertType: CustomAlertView.alertType.loading)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
