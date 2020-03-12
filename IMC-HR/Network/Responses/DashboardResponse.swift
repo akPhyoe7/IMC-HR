@@ -28,23 +28,4 @@ struct DashboardResponse : Codable {
     let annualleave : Int?
     let medicalleave : Int?
     let maternityleave : Int?
-    
-    static func mapToVO (data : DashboardResponse) -> DashbaordVO {
-        
-        let dashboard = DashbaordVO()
-        dashboard.id = data.id
-        dashboard.name = data.name
-        dashboard.photoUrl = data.photoUrl
-        dashboard.jobTitle = data.jobTitle
-        dashboard.loginId = data.loginId
-        dashboard.phoneNo = data.phoneNo
-        dashboard.department1 = data.department1
-        dashboard.department2 = data.department2
-        dashboard.casualleave = data.casualleave
-        dashboard.annualleave = data.annualleave
-        dashboard.medicalleave = data.medicalleave
-        dashboard.maternityleave = data.medicalleave
-        
-        return dashboard
-    }
 }

@@ -19,7 +19,7 @@ class DataFetcher {
     
     private init() {}
     
-    func fetchCampusRange (completion : @escaping ([CampusRangeResponse]) -> Void) {
+    func fetchCampusRange (Completion : @escaping ([CampusRangeResponse]) -> Void) {
         let route = URL(string: Routes.Get.campusRange)!
         AF.request(route,
                    method: .get,
@@ -29,10 +29,10 @@ class DataFetcher {
             case .success(_) :
                 if let result = try? JSONDecoder().decode([CampusRangeResponse].self, from: response.data!) {
                     print(result)
-                    completion(result)
+                    Completion(result)
                 } else {
                     print("failed to decode data")
-                    completion([CampusRangeResponse]())
+                    Completion([CampusRangeResponse]())
                 }
             case let .failure(error):
                 print(error)
@@ -40,7 +40,7 @@ class DataFetcher {
         }.resume()
     }
     
-    func fetchDashboard (completion : @escaping (DashboardResponse) -> Void) {
+    func fetchDashboard (Completion : @escaping (DashboardResponse) -> Void) {
         let route = URL(string: Routes.Get.dashboard)!
         AF.request(route,
                    method: .get,
@@ -49,14 +49,14 @@ class DataFetcher {
                 switch response.result {
                 case .success(_):
                     if let result = try? JSONDecoder().decode(DashboardResponse.self, from: response.data!) {
-                        completion(result)
+                        Completion(result)
                     } else {
                         print("failed to decode data")
                     }
                 case let .failure(error):
                     print(error)
                 }
-        }
+        }.resume()
     }
     
     func fetchCheckIn (Completion : @escaping (String) -> Void) {
@@ -76,8 +76,9 @@ class DataFetcher {
                     Completion(message)
                 case let .failure(error):
                     print(error)
+                    Completion("error")
                 }
-        }
+        }.resume()
     }
     
     func fetchCheckOut (Completion : @escaping (String) -> Void) {
@@ -97,7 +98,29 @@ class DataFetcher {
                     Completion(message)
                 case let .failure(error):
                     print(error)
+                    Completion("error")
                 }
-        }
+        }.resume()
     }
+    
+    func fetchAttendanceList (Completion : @escaping ([AttendanceResponse]) -> Void) {
+        let route = URL(string: Routes.Get.attendanceList)!
+        AF.request(route,
+                   method: .get,
+                   headers: headers)
+            .responseJSON{ (response) in
+                switch response.result {
+                case .success(_):
+                    if let result = try? JSONDecoder().decode([AttendanceResponse].self, from: response.data!) {
+                        Completion(result)
+                    } else {
+                        print("failed to decode data")
+                    }
+                case let .failure(error):
+                    print(error)
+                }
+        }.resume()
+    }
+    
+    
 }

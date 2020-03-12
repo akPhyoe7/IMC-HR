@@ -50,7 +50,7 @@ class CustomAlertView: UIView {
         //adding label
         lblMessage.textAlignment = .center
         lblMessage.numberOfLines = 2
-        lblMessage.font = lblMessage.font.withSize(15)
+        lblMessage.font = lblMessage.font.withSize(17)
         lblMessage.text = message
         frontView.addSubview(lblMessage)
         lblMessage.translatesAutoresizingMaskIntoConstraints = false

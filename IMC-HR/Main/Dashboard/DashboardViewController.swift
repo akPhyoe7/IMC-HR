@@ -25,12 +25,14 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var dashboardItemCollectionView: UICollectionView!
     
     let dashboardItemList : [itemData] = dashboardItemsData.sharedInstance.items
+    var dashboardData : DashboardResponse!
     var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ///hide shadow under the navigation bar and change bar text color
         self.navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "BGPrimary")!]
         
         self.imgProfile.layer.cornerRadius = imgProfile.frame.height / 2
         
@@ -92,9 +94,10 @@ class DashboardViewController: UIViewController {
     }
     
     fileprivate func initDashboardFetchRequest() {
-        CustomAlertView.shareInstance.showAlert(message: "loading", alertType: .loading)
+        CustomAlertView.shareInstance.showAlert(message: "Loading", alertType: .loading)
         DataFetcher.sharedInstance.fetchDashboard() { [weak self] dashboardResponse in
             DispatchQueue.main.async {
+                self?.dashboardData = dashboardResponse
                 //Bind data to View
                 self?.bindDashboardData(data: dashboardResponse)
             }
@@ -120,6 +123,14 @@ class DashboardViewController: UIViewController {
         layout.minimumLineSpacing = 15
         layout.minimumInteritemSpacing = 0
         self.dashboardItemCollectionView?.collectionViewLayout = layout
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "gotoProfile" {
+            if let nextViewController = segue.destination as? ProfileViewController {
+                nextViewController.profile = self.dashboardData
+            }
+        }
     }
     
 //    func touchAnimation(view: UIView) {
