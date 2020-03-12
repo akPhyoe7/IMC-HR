@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842FDEF624176ECC00E17C70 /* PayslipsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FDEF524176ECC00E17C70 /* PayslipsViewController.swift */; };
+		842FDEF824176EEC00E17C70 /* PayslipDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FDEF724176EEC00E17C70 /* PayslipDetailViewController.swift */; };
+		842FDEFA24176F3800E17C70 /* LeaveApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FDEF924176F3800E17C70 /* LeaveApprovalViewController.swift */; };
+		842FDEFC2417710800E17C70 /* AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FDEFB2417710800E17C70 /* AttendanceViewController.swift */; };
 		846DA9822414C9BD003F7071 /* LeaveRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DA9812414C9BD003F7071 /* LeaveRequestViewController.swift */; };
 		846DA9842414C9E4003F7071 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DA9832414C9E4003F7071 /* ProfileViewController.swift */; };
 		846DA98A2414CDAD003F7071 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DA9892414CDAD003F7071 /* API.swift */; };
@@ -15,6 +19,10 @@
 		846DA9942415588C003F7071 /* Attendance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846DA9932415588C003F7071 /* Attendance.storyboard */; };
 		8472F9E224167BAA00819251 /* CustomAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8472F9E024167BAA00819251 /* CustomAlertView.xib */; };
 		8472F9E42416947F00819251 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472F9E32416947F00819251 /* CustomAlertView.swift */; };
+		847D3C8F2419DD6A00D11E4D /* DashboardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D3C8E2419DD6A00D11E4D /* DashboardResponse.swift */; };
+		847D3C912419DEF400D11E4D /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D3C902419DEF400D11E4D /* DataFetcher.swift */; };
+		847D3C942419F73D00D11E4D /* DashboardItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D3C932419F73D00D11E4D /* DashboardItemData.swift */; };
+		847D3C962419FD0400D11E4D /* DashboardVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D3C952419FD0400D11E4D /* DashboardVO.swift */; };
 		84AFCD9424134073002743D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFCD9324134073002743D3 /* AppDelegate.swift */; };
 		84AFCD9824134073002743D3 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFCD9724134073002743D3 /* DashboardViewController.swift */; };
 		84AFCD9B24134073002743D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84AFCD9924134073002743D3 /* Main.storyboard */; };
@@ -57,6 +65,10 @@
 		5494FB99E08D2A989D32BFED /* Pods-IMC-HR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMC-HR.debug.xcconfig"; path = "Target Support Files/Pods-IMC-HR/Pods-IMC-HR.debug.xcconfig"; sourceTree = "<group>"; };
 		6618849199E54A35046CE01C /* Pods_IMC_HRTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMC_HRTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CF320FF60149194C3AA929E /* Pods-IMC-HR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMC-HR.release.xcconfig"; path = "Target Support Files/Pods-IMC-HR/Pods-IMC-HR.release.xcconfig"; sourceTree = "<group>"; };
+		842FDEF524176ECC00E17C70 /* PayslipsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayslipsViewController.swift; sourceTree = "<group>"; };
+		842FDEF724176EEC00E17C70 /* PayslipDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayslipDetailViewController.swift; sourceTree = "<group>"; };
+		842FDEF924176F3800E17C70 /* LeaveApprovalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApprovalViewController.swift; sourceTree = "<group>"; };
+		842FDEFB2417710800E17C70 /* AttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceViewController.swift; sourceTree = "<group>"; };
 		846DA9812414C9BD003F7071 /* LeaveRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveRequestViewController.swift; sourceTree = "<group>"; };
 		846DA9832414C9E4003F7071 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		846DA9892414CDAD003F7071 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -65,6 +77,10 @@
 		846DA9932415588C003F7071 /* Attendance.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Attendance.storyboard; sourceTree = "<group>"; };
 		8472F9E024167BAA00819251 /* CustomAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertView.xib; sourceTree = "<group>"; };
 		8472F9E32416947F00819251 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		847D3C8E2419DD6A00D11E4D /* DashboardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardResponse.swift; sourceTree = "<group>"; };
+		847D3C902419DEF400D11E4D /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
+		847D3C932419F73D00D11E4D /* DashboardItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardItemData.swift; sourceTree = "<group>"; };
+		847D3C952419FD0400D11E4D /* DashboardVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVO.swift; sourceTree = "<group>"; };
 		84AFCD9024134073002743D3 /* IMC-HR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IMC-HR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AFCD9324134073002743D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84AFCD9724134073002743D3 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +148,7 @@
 			children = (
 				846DA9882414CD71003F7071 /* Responses */,
 				846DA9872414CD63003F7071 /* EndPoints */,
+				847D3C902419DEF400D11E4D /* DataFetcher.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -155,6 +172,7 @@
 		846DA9882414CD71003F7071 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
+				847D3C8E2419DD6A00D11E4D /* DashboardResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -163,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				846DA98E24154993003F7071 /* LeaveApproval.storyboard */,
+				842FDEF924176F3800E17C70 /* LeaveApprovalViewController.swift */,
 			);
 			path = LeaveApproval;
 			sourceTree = "<group>";
@@ -171,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				846DA9932415588C003F7071 /* Attendance.storyboard */,
+				842FDEFB2417710800E17C70 /* AttendanceViewController.swift */,
 			);
 			path = Attendance;
 			sourceTree = "<group>";
@@ -182,6 +202,15 @@
 				8472F9E32416947F00819251 /* CustomAlertView.swift */,
 			);
 			path = CustomAlert;
+			sourceTree = "<group>";
+		};
+		847D3C922419F6EA00D11E4D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				847D3C932419F73D00D11E4D /* DashboardItemData.swift */,
+				847D3C952419FD0400D11E4D /* DashboardVO.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		84AFCD8724134073002743D3 = {
@@ -209,6 +238,7 @@
 		84AFCD9224134073002743D3 /* IMC-HR */ = {
 			isa = PBXGroup;
 			children = (
+				847D3C922419F6EA00D11E4D /* Models */,
 				846DA9862414CD32003F7071 /* Utilities */,
 				846DA9852414CD03003F7071 /* Network */,
 				84AFCDC3241344A7002743D3 /* Login */,
@@ -286,6 +316,8 @@
 			children = (
 				84BE575D2413FC1800D9B121 /* Payslip.storyboard */,
 				84BE575F2414063E00D9B121 /* PayslipListItemCell.xib */,
+				842FDEF524176ECC00E17C70 /* PayslipsViewController.swift */,
+				842FDEF724176EEC00E17C70 /* PayslipDetailViewController.swift */,
 			);
 			path = Payslip;
 			sourceTree = "<group>";
@@ -549,15 +581,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847D3C912419DEF400D11E4D /* DataFetcher.swift in Sources */,
+				842FDEFC2417710800E17C70 /* AttendanceViewController.swift in Sources */,
+				847D3C8F2419DD6A00D11E4D /* DashboardResponse.swift in Sources */,
+				847D3C942419F73D00D11E4D /* DashboardItemData.swift in Sources */,
 				846DA9842414C9E4003F7071 /* ProfileViewController.swift in Sources */,
 				846DA98C2414CDB8003F7071 /* Routes.swift in Sources */,
 				84AFCDC824134EF0002743D3 /* LoginViewController.swift in Sources */,
 				8472F9E42416947F00819251 /* CustomAlertView.swift in Sources */,
 				84AFCD9824134073002743D3 /* DashboardViewController.swift in Sources */,
+				847D3C962419FD0400D11E4D /* DashboardVO.swift in Sources */,
+				842FDEF624176ECC00E17C70 /* PayslipsViewController.swift in Sources */,
 				84AFCDCD2413A2AD002743D3 /* UIViewExtension.swift in Sources */,
 				84AFCD9424134073002743D3 /* AppDelegate.swift in Sources */,
 				846DA9822414C9BD003F7071 /* LeaveRequestViewController.swift in Sources */,
 				846DA98A2414CDAD003F7071 /* API.swift in Sources */,
+				842FDEF824176EEC00E17C70 /* PayslipDetailViewController.swift in Sources */,
+				842FDEFA24176F3800E17C70 /* LeaveApprovalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

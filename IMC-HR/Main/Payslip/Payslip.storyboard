@@ -11,7 +11,7 @@
         <!--Payslips-->
         <scene sceneID="yt7-4A-awv">
             <objects>
-                <viewController id="aNl-cS-1A7" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PayslipsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aNl-cS-1A7" customClass="PayslipsViewController" customModule="IMC_HR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Vk-Cw-yFm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,7 +42,7 @@
         <!--Payslip Detail-->
         <scene sceneID="IKQ-0d-wro">
             <objects>
-                <viewController id="bcR-jw-OiP" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PayslipDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bcR-jw-OiP" customClass="PayslipDetailViewController" customModule="IMC_HR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2p5-hW-W3T">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

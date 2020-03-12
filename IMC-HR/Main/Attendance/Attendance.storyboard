@@ -12,7 +12,7 @@
         <!--Attendance-->
         <scene sceneID="jaK-m1-WYk">
             <objects>
-                <viewController id="HAk-8e-1LZ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AttendanceViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HAk-8e-1LZ" customClass="AttendanceViewController" customModule="IMC_HR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pAj-7L-o0E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

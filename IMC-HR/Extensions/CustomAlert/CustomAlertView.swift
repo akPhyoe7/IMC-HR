@@ -139,6 +139,9 @@ class CustomAlertView: UIView {
     }
     
     func hideAlert() {
+        for view in self.frontView.subviews {
+            view.removeFromSuperview()
+        }
         parientView.removeFromSuperview()
     }
 }

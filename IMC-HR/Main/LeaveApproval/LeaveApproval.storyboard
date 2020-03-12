@@ -11,7 +11,7 @@
         <!--Leave Approval-->
         <scene sceneID="6Tb-vD-W6D">
             <objects>
-                <viewController id="buQ-K0-aZX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeaveApprovalViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="buQ-K0-aZX" customClass="LeaveApprovalViewController" customModule="IMC_HR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wSO-Ky-C0i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
