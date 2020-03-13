@@ -9,10 +9,13 @@
 import UIKit
 
 class PayslipDetailViewController: UIViewController {
+    
+    var id : Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("id is : ", id ?? 0)
         // Do any additional setup after loading the view.
     }
     

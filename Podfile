@@ -7,8 +7,6 @@ target 'IMC-HR' do
   pod 'SDWebImage', '~> 5.0'
   pod 'Alamofire', '= 5.0.0-rc.2'
 
-  # Pods for IMC-HR
-
   target 'IMC-HRTests' do
     inherit! :search_paths
     # Pods for testing

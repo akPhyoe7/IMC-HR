@@ -61,7 +61,11 @@ class CustomAlertView: UIView {
         case .loading:
             frontViewHeight.constant = 140
             //adding loading indicator
-            loadingIndicator.style = .large
+            if #available(iOS 13.0, *) {
+                loadingIndicator.style = .large
+            } else {
+                loadingIndicator.style = UIActivityIndicatorView.Style.whiteLarge
+            }
             loadingIndicator.color = .gray
             loadingIndicator.startAnimating()
             frontView.addSubview(loadingIndicator)

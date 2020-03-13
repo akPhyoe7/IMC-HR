@@ -130,6 +130,10 @@ class DashboardViewController: UIViewController {
             if let nextViewController = segue.destination as? ProfileViewController {
                 nextViewController.profile = self.dashboardData
             }
+        } else if segue.identifier == "gotoLeaveRequest" {
+            if let nextViewController = segue.destination as? LeaveRequestViewController {
+                nextViewController.dashboardResponse = self.dashboardData
+            }
         }
     }
     

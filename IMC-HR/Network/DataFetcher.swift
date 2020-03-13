@@ -122,5 +122,23 @@ class DataFetcher {
         }.resume()
     }
     
+    func fetchPayslipList (Completion : @escaping ([PayslipResponse]) -> Void) {
+        let route = URL(string: Routes.Get.payslip)!
+        AF.request(route,
+                   method: .get,
+                   headers: headers)
+            .responseJSON{ (response) in
+                switch response.result {
+                case .success(_):
+                    if let result = try? JSONDecoder().decode([PayslipResponse].self, from: response.data!) {
+                        Completion(result)
+                    } else {
+                        print("failed to decode data")
+                    }
+                case let .failure(error):
+                    print(error)
+                }
+        }.resume()
+    }
     
 }

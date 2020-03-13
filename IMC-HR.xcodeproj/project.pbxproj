@@ -12,6 +12,8 @@
 		842FDEF824176EEC00E17C70 /* PayslipDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FDEF724176EEC00E17C70 /* PayslipDetailViewController.swift */; };
 		842FDEFA24176F3800E17C70 /* LeaveApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FDEF924176F3800E17C70 /* LeaveApprovalViewController.swift */; };
 		842FDEFC2417710800E17C70 /* AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FDEFB2417710800E17C70 /* AttendanceViewController.swift */; };
+		8451D3CB241B2BCF00FE9500 /* PayslipResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451D3CA241B2BCF00FE9500 /* PayslipResponse.swift */; };
+		8451D3CD241B467B00FE9500 /* PayslipDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451D3CC241B467B00FE9500 /* PayslipDetailResponse.swift */; };
 		846DA9822414C9BD003F7071 /* LeaveRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DA9812414C9BD003F7071 /* LeaveRequestViewController.swift */; };
 		846DA9842414C9E4003F7071 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DA9832414C9E4003F7071 /* ProfileViewController.swift */; };
 		846DA98A2414CDAD003F7071 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DA9892414CDAD003F7071 /* API.swift */; };
@@ -70,6 +72,9 @@
 		842FDEF724176EEC00E17C70 /* PayslipDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayslipDetailViewController.swift; sourceTree = "<group>"; };
 		842FDEF924176F3800E17C70 /* LeaveApprovalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApprovalViewController.swift; sourceTree = "<group>"; };
 		842FDEFB2417710800E17C70 /* AttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceViewController.swift; sourceTree = "<group>"; };
+		8451D3CA241B2BCF00FE9500 /* PayslipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayslipResponse.swift; sourceTree = "<group>"; };
+		8451D3CC241B467B00FE9500 /* PayslipDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayslipDetailResponse.swift; sourceTree = "<group>"; };
+		8451D3CE241B4F8600FE9500 /* Objc-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objc-Bridge-Header.h"; sourceTree = "<group>"; };
 		846DA9812414C9BD003F7071 /* LeaveRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveRequestViewController.swift; sourceTree = "<group>"; };
 		846DA9832414C9E4003F7071 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		846DA9892414CDAD003F7071 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -156,6 +161,7 @@
 		846DA9862414CD32003F7071 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8451D3CE241B4F8600FE9500 /* Objc-Bridge-Header.h */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -174,6 +180,8 @@
 			children = (
 				847D3C8E2419DD6A00D11E4D /* DashboardResponse.swift */,
 				842828A3241A860D00942584 /* AttendanceResponse.swift */,
+				8451D3CA241B2BCF00FE9500 /* PayslipResponse.swift */,
+				8451D3CC241B467B00FE9500 /* PayslipDetailResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -582,6 +590,7 @@
 			files = (
 				847D3C912419DEF400D11E4D /* DataFetcher.swift in Sources */,
 				842FDEFC2417710800E17C70 /* AttendanceViewController.swift in Sources */,
+				8451D3CB241B2BCF00FE9500 /* PayslipResponse.swift in Sources */,
 				847D3C8F2419DD6A00D11E4D /* DashboardResponse.swift in Sources */,
 				847D3C942419F73D00D11E4D /* DashboardItemData.swift in Sources */,
 				846DA9842414C9E4003F7071 /* ProfileViewController.swift in Sources */,
@@ -597,6 +606,7 @@
 				846DA9822414C9BD003F7071 /* LeaveRequestViewController.swift in Sources */,
 				846DA98A2414CDAD003F7071 /* API.swift in Sources */,
 				842FDEF824176EEC00E17C70 /* PayslipDetailViewController.swift in Sources */,
+				8451D3CD241B467B00FE9500 /* PayslipDetailResponse.swift in Sources */,
 				842FDEFA24176F3800E17C70 /* LeaveApprovalViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -702,7 +712,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -756,7 +766,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -772,6 +782,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = TK22U6U79B;
 				INFOPLIST_FILE = "IMC-HR/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -780,6 +791,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.akp.IMC-HR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/IMC-HR/Utilities/Objc-Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -791,6 +803,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = TK22U6U79B;
 				INFOPLIST_FILE = "IMC-HR/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -799,6 +812,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.akp.IMC-HR";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/IMC-HR/Utilities/Objc-Bridge-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A6S-cB-JWj">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -988,27 +989,45 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y14-op-her">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y14-op-her" customClass="DesignableButton" customModule="IMC_HR" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="233" width="335" height="40"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" name="BGPrimary"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="v61-fx-zIt"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Full Day">
-                                                    <color key="titleColor" name="BGPrimary"/>
+                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onTouchBtnFullDay:" destination="Fsv-Vf-Pbn" eventType="touchUpInside" id="6Gq-wi-kz2"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwx-TA-XnI">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jwx-TA-XnI" customClass="DesignableButton" customModule="IMC_HR" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="293" width="335" height="40"/>
-                                                <color key="backgroundColor" name="BGPrimary"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="kQT-gR-0U9"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <color key="tintColor" name="BGPrimary"/>
                                                 <state key="normal" title="Half Day">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onTouchBtnHalfDay:" destination="Fsv-Vf-Pbn" eventType="touchUpInside" id="bMl-ol-ESc"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6sV-fm-hPd" customClass="DesignableView" customModule="IMC_HR" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="353" width="335" height="50"/>
@@ -1028,7 +1047,7 @@
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="4UN-Ip-TfS"/>
                                                     <constraint firstItem="SGg-si-ix3" firstAttribute="top" secondItem="6sV-fm-hPd" secondAttribute="top" constant="5" id="5Wv-pc-KEI"/>
@@ -1134,6 +1153,21 @@
                         <viewLayoutGuide key="safeArea" id="SDE-8G-hNb"/>
                     </view>
                     <navigationItem key="navigationItem" title="Leave Request" id="3Fe-jA-40X"/>
+                    <connections>
+                        <outlet property="btnFullDay" destination="Y14-op-her" id="CSj-c4-MX3"/>
+                        <outlet property="btnHalfDay" destination="Jwx-TA-XnI" id="Hkn-VH-UzB"/>
+                        <outlet property="lblEndDate" destination="mvm-8j-AKa" id="cX1-oZ-r3v"/>
+                        <outlet property="lblHalfDay" destination="SGg-si-ix3" id="bR9-55-ylh"/>
+                        <outlet property="lblLeaveDayLeft" destination="Qwa-CE-5AM" id="Ye7-6r-sbV"/>
+                        <outlet property="lblLeaveTitle" destination="VBM-nL-MJy" id="HCo-OS-ATK"/>
+                        <outlet property="lblStartDate" destination="O5s-ac-Nfw" id="jFA-4I-D2r"/>
+                        <outlet property="scrollView" destination="DV2-pk-zXg" id="3Vx-5s-Td3"/>
+                        <outlet property="selectEndDateView" destination="y4a-fc-vBR" id="xxM-kp-QsF"/>
+                        <outlet property="selectHalfDayView" destination="6sV-fm-hPd" id="oxU-Ld-0p7"/>
+                        <outlet property="selectLeaveView" destination="RYB-Nn-BEl" id="Jo4-7A-8xV"/>
+                        <outlet property="selectStartDateView" destination="sB3-S3-EvE" id="bDF-fP-YzZ"/>
+                        <outlet property="tvReason" destination="jjj-JL-VPR" id="LY7-ky-arR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D5T-uc-taR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
