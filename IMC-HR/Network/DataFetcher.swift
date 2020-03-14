@@ -19,6 +19,34 @@ class DataFetcher {
     
     private init() {}
     
+    func fetchLogin (username : String, password : String, Completion : @escaping (SigninResponse) -> Void) {
+        let route = URL(string: Routes.Post.signIn)!
+        let postHeaders : HTTPHeaders = [
+            "Content-Type" : "application/json",
+            "X-Requested-With" : "XMLHttpRequest",
+            "schoolid" : "2"
+        ]
+        let params : Parameters = [
+            "username" : "\(username)",
+            "password" : "\(password)"
+        ]
+        AF.request(route,
+                   method: .post,
+                   parameters: params,
+                   encoding: URLEncoding.httpBody,
+                   headers: postHeaders)
+            .responseJSON{ (response) in
+                switch response.result {
+                case .success(_):
+                    if let result = try? JSONDecoder().decode(SigninResponse.self, from: response.data!) {
+                        Completion(result)
+                    }
+                case let .failure(error):
+                    print(error)
+                }
+        }
+    }
+    
     func fetchCampusRange (Completion : @escaping ([CampusRangeResponse]) -> Void) {
         let route = URL(string: Routes.Get.campusRange)!
         AF.request(route,
@@ -28,7 +56,6 @@ class DataFetcher {
             switch response.result {
             case .success(_) :
                 if let result = try? JSONDecoder().decode([CampusRangeResponse].self, from: response.data!) {
-                    print(result)
                     Completion(result)
                 } else {
                     print("failed to decode data")
@@ -141,4 +168,22 @@ class DataFetcher {
         }.resume()
     }
     
+    func fetchPayslipDetail (payslipId : Int!, Completion : @escaping (PayslipDetailResponse) -> Void) {
+        let route = URL(string: "\(Routes.Get.payslipDetail)\(payslipId!)")!
+        AF.request(route,
+                   method: .get,
+                   headers: headers)
+            .responseJSON{ (response) in
+                switch response.result {
+                case .success(_):
+                    if let result = try? JSONDecoder().decode(PayslipDetailResponse.self, from: response.data!) {
+                        Completion(result)
+                    } else {
+                        print("failed to decode data")
+                    }
+                case let .failure(error):
+                    print(error)
+                }
+        }.resume()
+    }
 }

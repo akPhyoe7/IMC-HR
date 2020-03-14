@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I7x-H5-Ptc">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -20,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pb-dz-c9u">
-                                        <rect key="frame" x="0.0" y="69" width="375" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_IMCLogoBig" translatesAutoresizingMaskIntoConstraints="NO" id="Cry-u5-qLY">
                                                 <rect key="frame" x="114" y="83" width="147" height="146.5"/>
@@ -42,7 +43,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="EDi-Fx-Rw2"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" textContentType="email"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iH2-fD-KSB">
                                                 <rect key="frame" x="50" y="353.5" width="275" height="40"/>
@@ -51,7 +52,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="D9M-QB-ZQH"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" textContentType="password"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1D-i6-JOH">
                                                 <rect key="frame" x="50" y="413.5" width="275" height="40"/>
@@ -62,6 +63,21 @@
                                                 <state key="normal" title="Sign In">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="onTouchSignInBtn:" destination="I7x-H5-Ptc" eventType="touchUpInside" id="yym-GA-JJU"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRl-xy-mAe">
+                                                <rect key="frame" x="285" y="353.5" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="DkV-9b-V8X"/>
+                                                    <constraint firstAttribute="height" constant="40" id="pGM-Ar-J6y"/>
+                                                </constraints>
+                                                <color key="tintColor" name="BGPrimary"/>
+                                                <state key="normal" image="eye.slash" catalog="system"/>
+                                                <connections>
+                                                    <action selector="onTouchShowPwdBtn:" destination="I7x-H5-Ptc" eventType="touchUpInside" id="F8m-W6-RO0"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -69,10 +85,12 @@
                                             <constraint firstItem="iH2-fD-KSB" firstAttribute="top" secondItem="fi3-0P-lHy" secondAttribute="bottom" constant="20" id="4Iu-1P-SeX"/>
                                             <constraint firstItem="iH2-fD-KSB" firstAttribute="trailing" secondItem="O1D-i6-JOH" secondAttribute="trailing" id="9nd-5y-v3f"/>
                                             <constraint firstItem="adP-TC-1gh" firstAttribute="centerX" secondItem="fi3-0P-lHy" secondAttribute="centerX" id="AfP-WC-kvJ"/>
+                                            <constraint firstItem="pRl-xy-mAe" firstAttribute="trailing" secondItem="iH2-fD-KSB" secondAttribute="trailing" id="D9k-S9-hMY"/>
                                             <constraint firstItem="iH2-fD-KSB" firstAttribute="leading" secondItem="O1D-i6-JOH" secondAttribute="leading" id="FMi-FG-vCs"/>
                                             <constraint firstItem="adP-TC-1gh" firstAttribute="top" secondItem="Cry-u5-qLY" secondAttribute="bottom" constant="20" id="KAH-5d-RVg"/>
                                             <constraint firstItem="fi3-0P-lHy" firstAttribute="top" secondItem="adP-TC-1gh" secondAttribute="bottom" constant="20" id="Wia-5n-A3L"/>
                                             <constraint firstItem="fi3-0P-lHy" firstAttribute="leading" secondItem="9pb-dz-c9u" secondAttribute="leading" constant="50" id="bZj-ZM-pSB"/>
+                                            <constraint firstItem="pRl-xy-mAe" firstAttribute="centerY" secondItem="iH2-fD-KSB" secondAttribute="centerY" id="iCx-cv-5YS"/>
                                             <constraint firstItem="fi3-0P-lHy" firstAttribute="bottom" secondItem="9pb-dz-c9u" secondAttribute="centerY" id="ipT-b5-Lhh"/>
                                             <constraint firstItem="fi3-0P-lHy" firstAttribute="leading" secondItem="iH2-fD-KSB" secondAttribute="leading" id="jGk-iS-Hxl"/>
                                             <constraint firstItem="Cry-u5-qLY" firstAttribute="centerX" secondItem="9pb-dz-c9u" secondAttribute="centerX" id="pOj-Mz-5QU"/>
@@ -103,6 +121,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="56g-bq-wZf"/>
                     </view>
+                    <connections>
+                        <outlet property="btnShowPwd" destination="pRl-xy-mAe" id="PKg-bm-P9s"/>
+                        <outlet property="svBackground" destination="0Zx-zg-8RE" id="BDt-uo-KD2"/>
+                        <outlet property="tfEmail" destination="fi3-0P-lHy" id="qVM-xK-HF0"/>
+                        <outlet property="tfPassword" destination="iH2-fD-KSB" id="tq5-i1-RYq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dXW-3e-pm7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -110,6 +134,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="eye.slash" catalog="system" width="64" height="42"/>
         <image name="img_IMCLogoBig" width="300" height="300"/>
         <namedColor name="BGPrimary">
             <color red="0.24400000274181366" green="0.24799999594688416" blue="0.58499997854232788" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

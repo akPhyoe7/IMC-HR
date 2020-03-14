@@ -14,6 +14,7 @@
 		842FDEFC2417710800E17C70 /* AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FDEFB2417710800E17C70 /* AttendanceViewController.swift */; };
 		8451D3CB241B2BCF00FE9500 /* PayslipResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451D3CA241B2BCF00FE9500 /* PayslipResponse.swift */; };
 		8451D3CD241B467B00FE9500 /* PayslipDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451D3CC241B467B00FE9500 /* PayslipDetailResponse.swift */; };
+		8466E7F0241D527000FCFD4D /* SiginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466E7EF241D527000FCFD4D /* SiginResponse.swift */; };
 		846DA9822414C9BD003F7071 /* LeaveRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DA9812414C9BD003F7071 /* LeaveRequestViewController.swift */; };
 		846DA9842414C9E4003F7071 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DA9832414C9E4003F7071 /* ProfileViewController.swift */; };
 		846DA98A2414CDAD003F7071 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846DA9892414CDAD003F7071 /* API.swift */; };
@@ -75,6 +76,7 @@
 		8451D3CA241B2BCF00FE9500 /* PayslipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayslipResponse.swift; sourceTree = "<group>"; };
 		8451D3CC241B467B00FE9500 /* PayslipDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayslipDetailResponse.swift; sourceTree = "<group>"; };
 		8451D3CE241B4F8600FE9500 /* Objc-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objc-Bridge-Header.h"; sourceTree = "<group>"; };
+		8466E7EF241D527000FCFD4D /* SiginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiginResponse.swift; sourceTree = "<group>"; };
 		846DA9812414C9BD003F7071 /* LeaveRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveRequestViewController.swift; sourceTree = "<group>"; };
 		846DA9832414C9E4003F7071 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		846DA9892414CDAD003F7071 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				842828A3241A860D00942584 /* AttendanceResponse.swift */,
 				8451D3CA241B2BCF00FE9500 /* PayslipResponse.swift */,
 				8451D3CC241B467B00FE9500 /* PayslipDetailResponse.swift */,
+				8466E7EF241D527000FCFD4D /* SiginResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				8472F9E42416947F00819251 /* CustomAlertView.swift in Sources */,
 				84AFCD9824134073002743D3 /* DashboardViewController.swift in Sources */,
 				847D3C962419FD0400D11E4D /* DashboardVO.swift in Sources */,
+				8466E7F0241D527000FCFD4D /* SiginResponse.swift in Sources */,
 				842FDEF624176ECC00E17C70 /* PayslipsViewController.swift in Sources */,
 				84AFCDCD2413A2AD002743D3 /* UIViewExtension.swift in Sources */,
 				84AFCD9424134073002743D3 /* AppDelegate.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LeaveRequestViewController: UIViewController {
+class LeaveRequestViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var selectLeaveView: DesignableView!
@@ -18,8 +18,7 @@ class LeaveRequestViewController: UIViewController {
     @IBOutlet weak var lblStartDate: UILabel!
     @IBOutlet weak var selectEndDateView: DesignableView!
     @IBOutlet weak var lblEndDate: UILabel!
-    @IBOutlet weak var btnFullDay: UIButton!
-    @IBOutlet weak var btnHalfDay: UIButton!
+    @IBOutlet weak var scLeaveTime: UISegmentedControl!
     @IBOutlet weak var selectHalfDayView: DesignableView!
     @IBOutlet weak var lblHalfDay: UILabel!
     @IBOutlet weak var tvReason: UITextView!
@@ -35,11 +34,6 @@ class LeaveRequestViewController: UIViewController {
         addGestureToView()
         
         initValues()
-        
-        self.leaveList = ["Casual Leave": dashboardResponse?.casualleave ?? 0,
-                    "Annual Leave": dashboardResponse?.annualleave ?? 0,
-                    "Medical Leave": dashboardResponse?.medicalleave ?? 0,
-                    "Maternity Leave": dashboardResponse?.maternityleave ?? 0]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,9 +48,33 @@ class LeaveRequestViewController: UIViewController {
     }
     
     fileprivate func initValues () {
-        btnFullDay.layer.backgroundColor = UIColor(named: "BGPrimary")?.cgColor
-        btnFullDay.tintColor = UIColor.white
-
+        self.leaveList = ["Casual Leave": dashboardResponse?.casualleave ?? 0,
+        "Annual Leave": dashboardResponse?.annualleave ?? 0,
+        "Medical Leave": dashboardResponse?.medicalleave ?? 0,
+        "Maternity Leave": dashboardResponse?.maternityleave ?? 0]
+        // selected option color
+        scLeaveTime.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: "BGPrimary")!], for: .selected)
+        // color of other options
+        scLeaveTime.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.lightGray], for: .normal)
+        
+        self.setupToHideKeyboardOnTapOnView()
+        self.tvReason.delegate = self
+        tvReason.text = "Add a Reason"
+        tvReason.textColor = UIColor.lightGray
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Add a Reason"
+            textView.textColor = UIColor.lightGray
+        }
     }
     
     fileprivate func addGestureToView () {
@@ -65,6 +83,11 @@ class LeaveRequestViewController: UIViewController {
         
         let selectHalfDayGesture = UITapGestureRecognizer(target: self, action: #selector(selectHalfDayLeave(_:)))
         selectHalfDayView.addGestureRecognizer(selectHalfDayGesture)
+        
+        let selectDatePickingGesture = UITapGestureRecognizer(target: self, action: #selector(selectDatePicking(_:)))
+        let selectDatePickingGesture2 = UITapGestureRecognizer(target: self, action: #selector(selectDatePicking(_:)))
+        selectStartDateView.addGestureRecognizer(selectDatePickingGesture)
+        selectEndDateView.addGestureRecognizer(selectDatePickingGesture2)
     }
     
     @objc func selectLeave(_ sender:UITapGestureRecognizer) {
@@ -72,15 +95,20 @@ class LeaveRequestViewController: UIViewController {
     }
     
     @objc func selectHalfDayLeave(_ sender:UITapGestureRecognizer) {
-        showHalfDaySelectionAlert ()
+        showHalfDaySelectionAlert()
     }
     
+    @objc func selectDatePicking(_ sender:UITapGestureRecognizer) {
+        showDateTiemPicker()
+    }
+    
+    //MARK: - Selection Alerts
     func showLeaveSelectionAlert (leaves : [String:Int]) {
         let alert = UIAlertController(title: "Leave Type", message: "", preferredStyle: .alert)
         alert.view.tintColor = UIColor(named: "BGPrimary")
 
         for leave in leaves {
-            alert.addAction(UIAlertAction(title: leave.key, style: .default, handler: { (_) in
+            alert.addAction(UIAlertAction(title: "\(leave.key) - \(leave.value) day(s) left", style: .default, handler: { (_) in
                 self.lblLeaveTitle.text = leave.key
                 self.lblLeaveDayLeft.text = "\(leave.value) days left"
             }))
@@ -108,33 +136,40 @@ class LeaveRequestViewController: UIViewController {
         })
     }
     
+    private func showDateTiemPicker() {
+        let alert = UIAlertController(title: "Select Date", message: "\n\n\n\n\n\n", preferredStyle: .alert)
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        alert.view.addSubview(datePicker)
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 20).isActive = true
+        datePicker.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -20).isActive = true
+        datePicker.leftAnchor.constraint(equalTo: alert.view.leftAnchor, constant: 0).isActive = true
+        datePicker.rightAnchor.constraint(equalTo: alert.view.rightAnchor, constant: 0).isActive = true
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Select", style: .default, handler: { (_) in
+            
+        }))
+        self.present(alert, animated: true, completion:{
+            alert.view.superview?.isUserInteractionEnabled = true
+            alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissOnTapOutside)))
+        })
+    }
+    
+    
     @objc func dismissOnTapOutside(){
        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func onTouchBtnFullDay(_ sender: Any) {
-        self.radioButton(fullDay: true)
-        
-        self.selectHalfDayView.isUserInteractionEnabled = false
-    }
-    
-    @IBAction func onTouchBtnHalfDay(_ sender: Any) {
-        self.radioButton(fullDay: false)
-        
-        self.selectHalfDayView.isUserInteractionEnabled = true
-    }
-    
-    fileprivate func radioButton(fullDay : Bool) {
-        if fullDay{
-            btnFullDay.layer.backgroundColor = UIColor(named: "BGPrimary")?.cgColor
-            btnFullDay.tintColor = .white
-            btnHalfDay.layer.backgroundColor = UIColor.white.cgColor
-            btnHalfDay.tintColor = UIColor(named: "BGPrimary")
-        }else{
-            btnFullDay.layer.backgroundColor = UIColor.white.cgColor
-            btnFullDay.tintColor = UIColor(named: "BGPrimary")
-            btnHalfDay.layer.backgroundColor = UIColor(named: "BGPrimary")?.cgColor
-            btnHalfDay.tintColor = .white
+    @IBAction func ontouchLeaveSegment(_ sender: Any) {
+        switch scLeaveTime.selectedSegmentIndex {
+        case 0:
+            self.selectHalfDayView.isUserInteractionEnabled = false
+        case 1:
+            self.selectHalfDayView.isUserInteractionEnabled = true
+        default:
+            break;
         }
     }
     

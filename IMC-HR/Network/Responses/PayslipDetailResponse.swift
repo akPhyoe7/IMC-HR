@@ -25,7 +25,7 @@ struct PayslipDetailResponse : Codable {
 struct paySlipItemRepList : Codable {
     let id : Int?
     let name : String?
-    let amount : String?
+    let amount : Int?
     let salaryType : String?
     let accountingEntry : String?
 }

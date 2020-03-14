@@ -7,14 +7,22 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class LoginViewController: UIViewController {
-    
-    var dashboardItems : [itemData] = []
 
+    @IBOutlet weak var svBackground: UIScrollView!
+    @IBOutlet weak var tfEmail: UITextField!
+    @IBOutlet weak var tfPassword: UITextField!
+    @IBOutlet weak var btnShowPwd: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func onTouchShowPwdBtn(_ sender: Any) {
+    }
+    @IBAction func onTouchSignInBtn(_ sender: Any) {
     }
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class LeaveApprovalViewController: UIViewController {
 
+    @IBOutlet weak var leaveApprovalTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,4 +29,39 @@ class LeaveApprovalViewController: UIViewController {
     }
     */
 
+}
+
+extension LeaveApprovalViewController : UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    
+}
+
+extension LeaveApprovalViewController : UITableViewDelegate {
+    
+}
+
+class LeaveApprovalTableViewCell: UITableViewCell {
+    @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var lblLeaveType: UILabel!
+    @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var lblApproverName: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    static var identifier : String {
+        return String(describing: self)
+    }
 }

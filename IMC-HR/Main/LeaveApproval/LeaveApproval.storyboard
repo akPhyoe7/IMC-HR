@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CgV-rK-HG1">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -20,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="160" id="ZsO-zo-wB1">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeaveApprovalTableViewCell" rowHeight="160" id="ZsO-zo-wB1" customClass="LeaveApprovalTableViewCell" customModule="IMC_HR" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZsO-zo-wB1" id="Epe-SB-cEE">
@@ -156,8 +157,19 @@
                                                 <constraint firstItem="G7T-Qu-xGT" firstAttribute="top" secondItem="qi5-BT-ojG" secondAttribute="top" constant="10" id="z2Z-BM-U6d"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgProfile" destination="rOC-Hs-84z" id="adV-UK-lfr"/>
+                                            <outlet property="lblApproverName" destination="8gx-VX-pX7" id="6Qj-pG-DRB"/>
+                                            <outlet property="lblDate" destination="sSq-7Y-ieW" id="ceh-FJ-Cwc"/>
+                                            <outlet property="lblLeaveType" destination="63L-rX-cBr" id="CnF-Eh-TvJ"/>
+                                            <outlet property="lblName" destination="R3R-Iw-P4N" id="ZgT-4O-7xa"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="buQ-K0-aZX" id="grE-YQ-4Nb"/>
+                                    <outlet property="delegate" destination="buQ-K0-aZX" id="En6-Wi-uY0"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -170,6 +182,9 @@
                         <viewLayoutGuide key="safeArea" id="a9P-JG-YbF"/>
                     </view>
                     <navigationItem key="navigationItem" title="Leave Approval" id="ym0-aq-vEp"/>
+                    <connections>
+                        <outlet property="leaveApprovalTableView" destination="nxn-Cf-xnk" id="vEe-xZ-sTl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rec-Il-0Tc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -32,13 +32,14 @@ class dashboardItemsData {
         items = [
             itemData(iconImg: "icon_attendance", itemLabel: "Attendance", segueName: "gotoAttendance"),
             itemData(iconImg: "icon_leave", itemLabel: "Leave", segueName: "gotoLeaveRequest"),
+            itemData(iconImg: "icon_leaveapproval", itemLabel: "Leave Approval", segueName: "gotoLeaveApproval"),
             itemData(iconImg: "icon_payslip", itemLabel: "Payslip", segueName: "gotoPayslip"),
             itemData(iconImg: "icon_profile", itemLabel: "Profile", segueName: "gotoProfile")
         ]
     }
     
     func addLeaveApproval() {
-        items.append(leaveApprovalItem)
+        items.insert(leaveApprovalItem, at: 2)
     }
     
     func count() -> Int{

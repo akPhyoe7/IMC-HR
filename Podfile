@@ -6,6 +6,7 @@ target 'IMC-HR' do
   use_frameworks!
   pod 'SDWebImage', '~> 5.0'
   pod 'Alamofire', '= 5.0.0-rc.2'
+  pod 'SwiftKeychainWrapper'
 
   target 'IMC-HRTests' do
     inherit! :search_paths
