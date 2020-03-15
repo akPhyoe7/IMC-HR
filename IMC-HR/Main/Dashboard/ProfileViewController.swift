@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class ProfileViewController: UIViewController {
 
@@ -41,4 +42,26 @@ class ProfileViewController: UIViewController {
         self.lblPhone.text = data.phoneNo
     }
 
+    @IBAction func onTouchLogoutBtn(_ sender: Any) {
+        //remove store auth token and go to sign in view
+        let alert = UIAlertController(title: "Sign Out?", message: "Are you sure you want to sign out!", preferredStyle: .alert)
+        alert.view.tintColor = UIColor(named: "BGPrimary")
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (_) in
+            let removeKey: Bool = KeychainWrapper.standard.removeObject(forKey: "auth")
+                if removeKey{
+                    let rootViewController = UIStoryboard(name: "Login", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+                    let navigationController = UINavigationController(rootViewController: rootViewController!)
+        //            appDelegate.window?.rootViewController = navigationController
+        //            appDelegate.window?.makeKeyAndVisible()
+                    UIApplication.shared.windows.first?.rootViewController = navigationController
+                    UIApplication.shared.windows.first?.makeKeyAndVisible()
+                }else{
+                    print("error in removing auth key")
+                }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
 }

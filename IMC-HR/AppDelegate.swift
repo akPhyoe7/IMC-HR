@@ -7,20 +7,39 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var authenticatedUser : Bool?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        window = application.windows.first
-        window?.makeKey()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         if #available(iOS 13.0, *) {
             window?.overrideUserInterfaceStyle = .light
         }
         
+        let authToken: String? = KeychainWrapper.standard.string(forKey: "auth") ?? ""
+        if authToken!.isEmpty {
+            self.authenticatedUser = false
+        }else{
+            self.authenticatedUser = true
+        }
+        
+        if self.authenticatedUser! {
+            let rootViewController = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "DashboardViewController") as? DashboardViewController
+            let navigationController = UINavigationController(rootViewController: rootViewController!)
+            window?.rootViewController = navigationController
+        }else{
+            let rootViewController = UIStoryboard(name: "Login", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+            let navigationController = UINavigationController(rootViewController: rootViewController!)
+            window?.rootViewController = navigationController
+        }
+        
+        window?.makeKeyAndVisible()
         return true
     }
 

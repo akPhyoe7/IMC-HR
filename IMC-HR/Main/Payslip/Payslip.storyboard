@@ -211,13 +211,13 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEG-B1-CIR">
-                                                        <rect key="frame" x="164" y="84.5" width="7" height="18"/>
+                                                        <rect key="frame" x="164" y="84.5" width="7" height="18.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" name="BGPrimary"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4P4-Bs-teJ">
-                                                        <rect key="frame" x="30" y="107.5" width="275" height="16"/>
+                                                        <rect key="frame" x="30" y="108" width="275" height="16"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" name="BGPrimary"/>
                                                         <nil key="highlightedColor"/>
@@ -305,6 +305,7 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstItem="4P4-Bs-teJ" firstAttribute="top" secondItem="zEG-B1-CIR" secondAttribute="bottom" constant="5" id="1D9-75-H3w"/>
+                                                    <constraint firstItem="7sF-tA-NBe" firstAttribute="top" secondItem="rr7-Tw-fCa" secondAttribute="top" constant="24.5" id="CbZ-QS-4kK"/>
                                                     <constraint firstItem="zEG-B1-CIR" firstAttribute="top" secondItem="7sF-tA-NBe" secondAttribute="bottom" constant="10" id="FM8-Aa-73J"/>
                                                     <constraint firstItem="g84-NH-dGR" firstAttribute="leading" secondItem="rr7-Tw-fCa" secondAttribute="leading" id="IEj-ud-aOQ"/>
                                                     <constraint firstAttribute="trailing" secondItem="g84-NH-dGR" secondAttribute="trailing" id="JTb-HW-xZY"/>

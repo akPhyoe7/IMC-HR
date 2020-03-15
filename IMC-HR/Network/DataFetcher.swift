@@ -23,26 +23,31 @@ class DataFetcher {
         let route = URL(string: Routes.Post.signIn)!
         let postHeaders : HTTPHeaders = [
             "Content-Type" : "application/json",
-            "X-Requested-With" : "XMLHttpRequest",
-            "schoolid" : "2"
+            "X-Requested-With" : "XMLHttpRequest"
         ]
         let params : Parameters = [
-            "username" : "\(username)",
-            "password" : "\(password)"
+            "username" : username,
+            "password" : password
         ]
         AF.request(route,
                    method: .post,
                    parameters: params,
-                   encoding: URLEncoding.httpBody,
+                   encoding: JSONEncoding.default,
                    headers: postHeaders)
+        .validate(contentType: ["application/json"])
             .responseJSON{ (response) in
+                //For Network Error
+                guard response.error == nil else {
+                    print(response.error!)
+                    return
+                }
                 switch response.result {
                 case .success(_):
                     if let result = try? JSONDecoder().decode(SigninResponse.self, from: response.data!) {
                         Completion(result)
                     }
                 case let .failure(error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
         }
     }

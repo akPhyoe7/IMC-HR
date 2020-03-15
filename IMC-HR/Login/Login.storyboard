@@ -31,8 +31,8 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info Myanmar College" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adP-TC-1gh">
-                                                <rect key="frame" x="92.5" y="249.5" width="190" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <rect key="frame" x="90" y="249.5" width="195.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                 <color key="textColor" name="BGPrimary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -54,8 +54,8 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" textContentType="password"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1D-i6-JOH">
-                                                <rect key="frame" x="50" y="413.5" width="275" height="40"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1D-i6-JOH" customClass="DesignableButton" customModule="IMC_HR" customModuleProvider="target">
+                                                <rect key="frame" x="50" y="423.5" width="275" height="40"/>
                                                 <color key="backgroundColor" name="BGPrimary"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="zR9-ST-tzw"/>
@@ -63,6 +63,11 @@
                                                 <state key="normal" title="Sign In">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="onTouchSignInBtn:" destination="I7x-H5-Ptc" eventType="touchUpInside" id="yym-GA-JJU"/>
                                                 </connections>
@@ -94,18 +99,20 @@
                                             <constraint firstItem="fi3-0P-lHy" firstAttribute="bottom" secondItem="9pb-dz-c9u" secondAttribute="centerY" id="ipT-b5-Lhh"/>
                                             <constraint firstItem="fi3-0P-lHy" firstAttribute="leading" secondItem="iH2-fD-KSB" secondAttribute="leading" id="jGk-iS-Hxl"/>
                                             <constraint firstItem="Cry-u5-qLY" firstAttribute="centerX" secondItem="9pb-dz-c9u" secondAttribute="centerX" id="pOj-Mz-5QU"/>
-                                            <constraint firstItem="O1D-i6-JOH" firstAttribute="top" secondItem="iH2-fD-KSB" secondAttribute="bottom" constant="20" id="rlf-op-vNt"/>
+                                            <constraint firstItem="O1D-i6-JOH" firstAttribute="top" secondItem="iH2-fD-KSB" secondAttribute="bottom" constant="30" id="rlf-op-vNt"/>
                                             <constraint firstItem="Cry-u5-qLY" firstAttribute="centerX" secondItem="adP-TC-1gh" secondAttribute="centerX" id="tgi-5i-1Qh"/>
                                             <constraint firstItem="fi3-0P-lHy" firstAttribute="trailing" secondItem="iH2-fD-KSB" secondAttribute="trailing" id="wQ8-ZE-sxm"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="9pb-dz-c9u" firstAttribute="top" secondItem="0Zx-zg-8RE" secondAttribute="top" id="Ag0-TE-fue"/>
                                     <constraint firstItem="9pb-dz-c9u" firstAttribute="leading" secondItem="POU-fJ-ncN" secondAttribute="leading" id="CZT-lZ-DsR"/>
-                                    <constraint firstAttribute="trailing" secondItem="9pb-dz-c9u" secondAttribute="trailing" id="Ll0-Sl-lUa"/>
                                     <constraint firstItem="9pb-dz-c9u" firstAttribute="top" secondItem="POU-fJ-ncN" secondAttribute="top" id="XV9-Fe-lUf"/>
-                                    <constraint firstAttribute="bottom" secondItem="9pb-dz-c9u" secondAttribute="bottom" id="jq3-xT-iPF"/>
+                                    <constraint firstAttribute="bottom" secondItem="9pb-dz-c9u" secondAttribute="bottom" id="b1l-9p-KZY"/>
+                                    <constraint firstItem="9pb-dz-c9u" firstAttribute="leading" secondItem="0Zx-zg-8RE" secondAttribute="leading" id="kAg-tn-wP3"/>
                                     <constraint firstItem="9pb-dz-c9u" firstAttribute="bottom" secondItem="POU-fJ-ncN" secondAttribute="bottom" id="uRz-E6-ap3"/>
+                                    <constraint firstAttribute="trailing" secondItem="9pb-dz-c9u" secondAttribute="trailing" id="zIR-f5-sV7"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="dIy-pq-oaQ"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="POU-fJ-ncN"/>
@@ -113,11 +120,11 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="0Zx-zg-8RE" firstAttribute="centerX" secondItem="Mrr-b0-QKk" secondAttribute="centerX" id="FnG-fW-0gV"/>
+                            <constraint firstItem="56g-bq-wZf" firstAttribute="bottom" secondItem="0Zx-zg-8RE" secondAttribute="bottom" id="GED-HK-BE4"/>
                             <constraint firstItem="9pb-dz-c9u" firstAttribute="width" secondItem="Mrr-b0-QKk" secondAttribute="width" id="Jp6-el-ULt"/>
-                            <constraint firstItem="0Zx-zg-8RE" firstAttribute="bottom" secondItem="56g-bq-wZf" secondAttribute="bottom" id="Tpq-jy-pg6"/>
-                            <constraint firstItem="0Zx-zg-8RE" firstAttribute="top" secondItem="56g-bq-wZf" secondAttribute="top" id="VuJ-xk-U9N"/>
-                            <constraint firstItem="0Zx-zg-8RE" firstAttribute="leading" secondItem="56g-bq-wZf" secondAttribute="leading" id="fAd-fh-4zv"/>
+                            <constraint firstItem="56g-bq-wZf" firstAttribute="trailing" secondItem="0Zx-zg-8RE" secondAttribute="trailing" id="jJu-hG-FND"/>
+                            <constraint firstItem="0Zx-zg-8RE" firstAttribute="leading" secondItem="56g-bq-wZf" secondAttribute="leading" id="mqn-QZ-BH7"/>
+                            <constraint firstItem="0Zx-zg-8RE" firstAttribute="top" secondItem="56g-bq-wZf" secondAttribute="top" id="xRH-ia-pgt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="56g-bq-wZf"/>
                     </view>
@@ -126,11 +133,22 @@
                         <outlet property="svBackground" destination="0Zx-zg-8RE" id="BDt-uo-KD2"/>
                         <outlet property="tfEmail" destination="fi3-0P-lHy" id="qVM-xK-HF0"/>
                         <outlet property="tfPassword" destination="iH2-fD-KSB" id="tq5-i1-RYq"/>
+                        <segue destination="XBs-kt-gcL" kind="show" identifier="gotoMain" id="YgX-BL-GDi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dXW-3e-pm7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="280.80000000000001" y="109.29535232383809"/>
+        </scene>
+        <!--DashboardViewController-->
+        <scene sceneID="7eh-a3-XmS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="DashboardViewController" id="XBs-kt-gcL" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="aK5-By-cpA"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hOR-ag-phx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1000" y="109"/>
         </scene>
     </scenes>
     <resources>
