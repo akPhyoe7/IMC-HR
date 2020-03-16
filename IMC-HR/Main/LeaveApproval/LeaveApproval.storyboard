@@ -19,7 +19,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nxn-Cf-xnk">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeaveApprovalTableViewCell" rowHeight="160" id="ZsO-zo-wB1" customClass="LeaveApprovalTableViewCell" customModule="IMC_HR" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="160"/>
@@ -32,7 +32,7 @@
                                                     <rect key="frame" x="10" y="5" width="355" height="150"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="exh-wa-XHK">
-                                                            <rect key="frame" x="177.5" y="110" width="167.5" height="35"/>
+                                                            <rect key="frame" x="177.5" y="105" width="167.5" height="35"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiY-f8-oaJ" customClass="DesignableButton" customModule="IMC_HR" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="79" height="35"/>
@@ -46,6 +46,9 @@
                                                                             <real key="value" value="5"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="onTouchApproveBtn:" destination="ZsO-zo-wB1" eventType="touchUpInside" id="iC1-zC-RTa"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXd-Rz-azf" customClass="DesignableButton" customModule="IMC_HR" customModuleProvider="target">
                                                                     <rect key="frame" x="89" y="0.0" width="78.5" height="35"/>
@@ -59,6 +62,9 @@
                                                                             <real key="value" value="5"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="onTouchRejectBtn:" destination="ZsO-zo-wB1" eventType="touchUpInside" id="y3h-hV-n5B"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
@@ -67,7 +73,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="exh-wa-XHK" secondAttribute="trailing" constant="10" id="Tsu-N8-IWt"/>
                                                         <constraint firstItem="exh-wa-XHK" firstAttribute="leading" secondItem="qi5-BT-ojG" secondAttribute="centerX" id="Y2g-6M-mYH"/>
-                                                        <constraint firstAttribute="bottom" secondItem="exh-wa-XHK" secondAttribute="bottom" constant="5" id="u9t-tG-KQm"/>
+                                                        <constraint firstAttribute="bottom" secondItem="exh-wa-XHK" secondAttribute="bottom" constant="10" id="u9t-tG-KQm"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -76,7 +82,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_IMCLogo" highlightedImage="img_IMCLogo" translatesAutoresizingMaskIntoConstraints="NO" id="rOC-Hs-84z">
-                                                    <rect key="frame" x="20" y="55" width="50" height="50"/>
+                                                    <rect key="frame" x="20" y="50" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="8oQ-Ce-90i"/>
                                                         <constraint firstAttribute="width" secondItem="rOC-Hs-84z" secondAttribute="height" multiplier="1:1" id="UCa-un-axy"/>
@@ -88,7 +94,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medical Leave Request" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="63L-rX-cBr">
-                                                    <rect key="frame" x="80" y="72.5" width="265" height="15"/>
+                                                    <rect key="frame" x="80" y="67.5" width="265" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="UNW-4k-Eg9"/>
                                                     </constraints>
@@ -97,35 +103,35 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="December 27, 2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSq-7Y-ieW">
-                                                    <rect key="frame" x="80" y="90.5" width="265" height="14.5"/>
+                                                    <rect key="frame" x="80" y="85.5" width="265" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Pending  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7T-Qu-xGT">
-                                                    <rect key="frame" x="20" y="15" width="73" height="24"/>
+                                                    <rect key="frame" x="20" y="15" width="69" height="20"/>
                                                     <color key="backgroundColor" name="BGYellow"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="24" id="xnY-u4-D0p"/>
+                                                        <constraint firstAttribute="height" constant="20" id="xnY-u4-D0p"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="12"/>
+                                                            <integer key="value" value="10"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daw Nan Mo Kham" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="8gx-VX-pX7">
-                                                    <rect key="frame" x="20" y="122" width="157.5" height="18"/>
+                                                    <rect key="frame" x="20" y="117" width="157.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" name="BGPrimary"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daw Khine Wint Thawar Htoo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3R-Iw-P4N">
-                                                    <rect key="frame" x="80" y="51.5" width="265" height="18"/>
+                                                    <rect key="frame" x="80" y="46.5" width="265" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -147,8 +153,8 @@
                                                 <constraint firstItem="63L-rX-cBr" firstAttribute="leading" secondItem="rOC-Hs-84z" secondAttribute="trailing" constant="10" id="fur-gn-sXM"/>
                                                 <constraint firstItem="63L-rX-cBr" firstAttribute="top" secondItem="R3R-Iw-P4N" secondAttribute="bottom" constant="3" id="i5f-8S-b8f"/>
                                                 <constraint firstItem="sSq-7Y-ieW" firstAttribute="top" secondItem="63L-rX-cBr" secondAttribute="bottom" constant="3" id="k0X-Xd-7Ue"/>
-                                                <constraint firstItem="rOC-Hs-84z" firstAttribute="centerY" secondItem="qi5-BT-ojG" secondAttribute="centerY" id="lcr-Pz-N1e"/>
-                                                <constraint firstItem="8gx-VX-pX7" firstAttribute="bottom" secondItem="qi5-BT-ojG" secondAttribute="bottom" constant="-15" id="nwC-UE-AqD"/>
+                                                <constraint firstItem="rOC-Hs-84z" firstAttribute="centerY" secondItem="qi5-BT-ojG" secondAttribute="centerY" constant="-5" id="lcr-Pz-N1e"/>
+                                                <constraint firstItem="8gx-VX-pX7" firstAttribute="bottom" secondItem="qi5-BT-ojG" secondAttribute="bottom" constant="-20" id="nwC-UE-AqD"/>
                                                 <constraint firstItem="R3R-Iw-P4N" firstAttribute="leading" secondItem="63L-rX-cBr" secondAttribute="leading" id="p0j-GJ-YDF"/>
                                                 <constraint firstItem="exh-wa-XHK" firstAttribute="top" secondItem="sSq-7Y-ieW" secondAttribute="bottom" constant="10" id="psd-lx-bTp"/>
                                                 <constraint firstItem="sSq-7Y-ieW" firstAttribute="trailing" secondItem="63L-rX-cBr" secondAttribute="trailing" id="qLc-v9-3hg"/>
@@ -161,6 +167,7 @@
                                             <outlet property="imgProfile" destination="rOC-Hs-84z" id="adV-UK-lfr"/>
                                             <outlet property="lblApproverName" destination="8gx-VX-pX7" id="6Qj-pG-DRB"/>
                                             <outlet property="lblDate" destination="sSq-7Y-ieW" id="ceh-FJ-Cwc"/>
+                                            <outlet property="lblLeaveStatus" destination="G7T-Qu-xGT" id="UQL-rB-3IX"/>
                                             <outlet property="lblLeaveType" destination="63L-rX-cBr" id="CnF-Eh-TvJ"/>
                                             <outlet property="lblName" destination="R3R-Iw-P4N" id="ZgT-4O-7xa"/>
                                         </connections>
@@ -172,7 +179,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="nxn-Cf-xnk" firstAttribute="leading" secondItem="a9P-JG-YbF" secondAttribute="leading" id="0O9-EM-Cwp"/>
                             <constraint firstItem="a9P-JG-YbF" firstAttribute="trailing" secondItem="nxn-Cf-xnk" secondAttribute="trailing" id="Cwj-At-bbW"/>

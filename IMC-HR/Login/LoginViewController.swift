@@ -25,6 +25,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         self.tfEmail.delegate = self
         self.tfPassword.delegate = self
+        self.tfPassword.isSecureTextEntry = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +63,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onTouchShowPwdBtn(_ sender: Any) {
+        if self.tfPassword.isSecureTextEntry {
+            self.tfPassword.isSecureTextEntry = false
+        }else{
+            self.tfPassword.isSecureTextEntry = true
+        }
     }
     
     @IBAction func onTouchSignInBtn(_ sender: Any) {

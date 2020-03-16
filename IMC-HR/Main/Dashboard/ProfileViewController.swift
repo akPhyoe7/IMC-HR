@@ -50,6 +50,7 @@ class ProfileViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { (_) in
             let removeKey: Bool = KeychainWrapper.standard.removeObject(forKey: "auth")
                 if removeKey{
+                    UserDefaults.standard.removeObject(forKey: "AccName")
                     let rootViewController = UIStoryboard(name: "Login", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
                     let navigationController = UINavigationController(rootViewController: rootViewController!)
         //            appDelegate.window?.rootViewController = navigationController

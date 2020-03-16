@@ -19,6 +19,7 @@ class DataFetcher {
     
     private init() {}
     
+    //MARK: - POST REQUESTS
     func fetchLogin (username : String, password : String, Completion : @escaping (SigninResponse) -> Void) {
         let route = URL(string: Routes.Post.signIn)!
         let postHeaders : HTTPHeaders = [
@@ -34,7 +35,6 @@ class DataFetcher {
                    parameters: params,
                    encoding: JSONEncoding.default,
                    headers: postHeaders)
-        .validate(contentType: ["application/json"])
             .responseJSON{ (response) in
                 //For Network Error
                 guard response.error == nil else {
@@ -49,9 +49,43 @@ class DataFetcher {
                 case let .failure(error):
                     print(error.localizedDescription)
                 }
-        }
+        }.resume()
     }
     
+    func fetchLeaveRequest (leaveType : String, startDate : String, endDate : String, reason : String, Completion : @escaping (String) -> Void) {
+        let route = URL(string: Routes.Post.requestLeave)!
+        let postHeaders : HTTPHeaders = [
+            "Content-Type" : "application/json",
+            "auth" : API.auth
+        ]
+        let params : Parameters = [
+            "leaveType" : leaveType,
+            "startDate" : startDate,
+            "endDate" : endDate,
+            "reason" : reason
+        ]
+        AF.request(route,
+                   method: .post,
+                   parameters: params,
+                   encoding: JSONEncoding.default,
+                   headers: postHeaders)
+            .responseJSON { (response) in
+                //For Network Error
+                guard response.error == nil else {
+                    print(response.error!)
+                    return
+                }
+                switch response.result {
+                case .success(let data):
+                    let resData = data as? [String:String]
+                    Completion(resData?["msg"] ?? "success")
+                case let .failure(error):
+                    print(error.localizedDescription)
+                }
+        }.resume()
+    }
+ 
+    //MARK: - GET REQUESTS
     func fetchCampusRange (Completion : @escaping ([CampusRangeResponse]) -> Void) {
         let route = URL(string: Routes.Get.campusRange)!
         AF.request(route,
@@ -190,5 +224,22 @@ class DataFetcher {
                     print(error)
                 }
         }.resume()
+    }
+    
+    func fetchLeaveApprovalList (Completion : @escaping (LeaveApprovalListResponse) -> Void) {
+        let route = URL(string: Routes.Get.leaveList)!
+        AF.request(route,
+                   method: .get,
+                   headers: headers)
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(_):
+                    if let result = try? JSONDecoder().decode(LeaveApprovalListResponse.self, from: response.data!) {
+                        Completion(result)
+                    }
+                case let .failure(error):
+                    print(error)
+                }
+        }
     }
 }

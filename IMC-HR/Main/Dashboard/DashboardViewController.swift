@@ -109,6 +109,7 @@ class DashboardViewController: UIViewController {
         let photoUrl = data.photoUrl ?? ""
         self.imgProfile.sd_setImage(with: URL(string: photoUrl), placeholderImage: UIImage(named: "img_IMCLogo"))
         self.lblName.text = data.name
+        UserDefaults.standard.set(data.name, forKey: "AccName")
         self.lblPosition.text = data.jobTitle
         self.lblAnnualDays.text = String(data.annualleave ?? 0)
         self.lblCasualDays.text = String(data.casualleave ?? 0)

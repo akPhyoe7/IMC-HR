@@ -24,12 +24,15 @@ struct Routes {
         /// Payslip list route.
         static let payslip = API.BASE_URL + "/rest/hr/payslip"
         
-        /// Payslip detail
+        /// Payslip detail route.
         /// must provide payslip id at the end
         static let payslipDetail = API.BASE_URL + "/rest/hr/payslip/detail/"
         
-        /// Attendance List route
+        /// Attendance List route.
         static let attendanceList = API.BASE_URL + "/rest/hr/attendance"
+        
+        /// Leave Approval List route.
+        static let leaveList = API.BASE_URL + "/rest/hr/leave/leavelist"
     }
     
     enum Post {

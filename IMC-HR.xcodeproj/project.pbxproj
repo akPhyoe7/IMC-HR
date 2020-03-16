@@ -12,6 +12,7 @@
 		842FDEF824176EEC00E17C70 /* PayslipDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FDEF724176EEC00E17C70 /* PayslipDetailViewController.swift */; };
 		842FDEFA24176F3800E17C70 /* LeaveApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FDEF924176F3800E17C70 /* LeaveApprovalViewController.swift */; };
 		842FDEFC2417710800E17C70 /* AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842FDEFB2417710800E17C70 /* AttendanceViewController.swift */; };
+		843C882A241F22260051A71B /* LeaveApprovalListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C8829241F22260051A71B /* LeaveApprovalListResponse.swift */; };
 		8451D3CB241B2BCF00FE9500 /* PayslipResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451D3CA241B2BCF00FE9500 /* PayslipResponse.swift */; };
 		8451D3CD241B467B00FE9500 /* PayslipDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8451D3CC241B467B00FE9500 /* PayslipDetailResponse.swift */; };
 		8466E7F0241D527000FCFD4D /* SiginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8466E7EF241D527000FCFD4D /* SiginResponse.swift */; };
@@ -73,6 +74,7 @@
 		842FDEF724176EEC00E17C70 /* PayslipDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayslipDetailViewController.swift; sourceTree = "<group>"; };
 		842FDEF924176F3800E17C70 /* LeaveApprovalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApprovalViewController.swift; sourceTree = "<group>"; };
 		842FDEFB2417710800E17C70 /* AttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceViewController.swift; sourceTree = "<group>"; };
+		843C8829241F22260051A71B /* LeaveApprovalListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveApprovalListResponse.swift; sourceTree = "<group>"; };
 		8451D3CA241B2BCF00FE9500 /* PayslipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayslipResponse.swift; sourceTree = "<group>"; };
 		8451D3CC241B467B00FE9500 /* PayslipDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayslipDetailResponse.swift; sourceTree = "<group>"; };
 		8451D3CE241B4F8600FE9500 /* Objc-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Objc-Bridge-Header.h"; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				8451D3CA241B2BCF00FE9500 /* PayslipResponse.swift */,
 				8451D3CC241B467B00FE9500 /* PayslipDetailResponse.swift */,
 				8466E7EF241D527000FCFD4D /* SiginResponse.swift */,
+				843C8829241F22260051A71B /* LeaveApprovalListResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				842FDEFC2417710800E17C70 /* AttendanceViewController.swift in Sources */,
 				8451D3CB241B2BCF00FE9500 /* PayslipResponse.swift in Sources */,
 				847D3C8F2419DD6A00D11E4D /* DashboardResponse.swift in Sources */,
+				843C882A241F22260051A71B /* LeaveApprovalListResponse.swift in Sources */,
 				847D3C942419F73D00D11E4D /* DashboardItemData.swift in Sources */,
 				846DA9842414C9E4003F7071 /* ProfileViewController.swift in Sources */,
 				846DA98C2414CDB8003F7071 /* Routes.swift in Sources */,
