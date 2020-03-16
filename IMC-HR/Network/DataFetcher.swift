@@ -97,7 +97,7 @@ class DataFetcher {
                 if let result = try? JSONDecoder().decode([CampusRangeResponse].self, from: response.data!) {
                     Completion(result)
                 } else {
-                    print("failed to decode data")
+                    print("failed to decode data in campus range")
                     Completion([CampusRangeResponse]())
                 }
             case let .failure(error):
@@ -117,7 +117,7 @@ class DataFetcher {
                     if let result = try? JSONDecoder().decode(DashboardResponse.self, from: response.data!) {
                         Completion(result)
                     } else {
-                        print("failed to decode data")
+                        print("failed to decode data in dashboard")
                     }
                 case let .failure(error):
                     print(error)
@@ -180,7 +180,7 @@ class DataFetcher {
                     if let result = try? JSONDecoder().decode([AttendanceResponse].self, from: response.data!) {
                         Completion(result)
                     } else {
-                        print("failed to decode data")
+                        print("failed to decode data in attendance list")
                     }
                 case let .failure(error):
                     print(error)
@@ -199,7 +199,7 @@ class DataFetcher {
                     if let result = try? JSONDecoder().decode([PayslipResponse].self, from: response.data!) {
                         Completion(result)
                     } else {
-                        print("failed to decode data")
+                        print("failed to decode data in payslip list")
                     }
                 case let .failure(error):
                     print(error)
@@ -218,7 +218,7 @@ class DataFetcher {
                     if let result = try? JSONDecoder().decode(PayslipDetailResponse.self, from: response.data!) {
                         Completion(result)
                     } else {
-                        print("failed to decode data")
+                        print("failed to decode data in payslip detail")
                     }
                 case let .failure(error):
                     print(error)

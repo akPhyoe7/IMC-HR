@@ -24,7 +24,7 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tvReason: UITextView!
     
     var dashboardResponse : DashboardResponse?
-    var leaveList : [String: Int]?
+    var startDate : Date = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,16 +42,18 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.leaveList?.removeAll()
         scrollView.contentInset.bottom = 0
         NotificationCenter.default.removeObserver(self)
     }
     
     fileprivate func initValues () {
-        self.leaveList = ["Casual Leave": dashboardResponse?.casualleave ?? 0,
-        "Annual Leave": dashboardResponse?.annualleave ?? 0,
-        "Medical Leave": dashboardResponse?.medicalleave ?? 0,
-        "Maternity Leave": dashboardResponse?.maternityleave ?? 0]
+        // set leave type
+        self.lblLeaveTitle.text = "Casual Leave"
+        self.lblLeaveDayLeft.text = "\(self.dashboardResponse?.casualleave ?? 0) day(s) left"
+        // set start date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM,yyyy"
+        self.lblStartDate.text = dateFormatter.string(from: Date())
         // selected option color
         scLeaveTime.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: "BGPrimary")!], for: .selected)
         // color of other options
@@ -84,35 +86,60 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
         let selectHalfDayGesture = UITapGestureRecognizer(target: self, action: #selector(selectHalfDayLeave(_:)))
         selectHalfDayView.addGestureRecognizer(selectHalfDayGesture)
         
-        let selectDatePickingGesture = UITapGestureRecognizer(target: self, action: #selector(selectDatePicking(_:)))
-        let selectDatePickingGesture2 = UITapGestureRecognizer(target: self, action: #selector(selectDatePicking(_:)))
+        let selectDatePickingGesture = UITapGestureRecognizer(target: self, action: #selector(selectStartDatePicking(_:)))
+        let selectDatePickingGesture2 = UITapGestureRecognizer(target: self, action: #selector(selectEndDatePicking(_:)))
         selectStartDateView.addGestureRecognizer(selectDatePickingGesture)
         selectEndDateView.addGestureRecognizer(selectDatePickingGesture2)
     }
     
     @objc func selectLeave(_ sender:UITapGestureRecognizer) {
-        showLeaveSelectionAlert(leaves: self.leaveList!)
+        showLeaveSelectionAlert()
     }
     
     @objc func selectHalfDayLeave(_ sender:UITapGestureRecognizer) {
         showHalfDaySelectionAlert()
     }
     
-    @objc func selectDatePicking(_ sender:UITapGestureRecognizer) {
-        showDateTiemPicker()
+    @objc func selectStartDatePicking(_ sender:UITapGestureRecognizer) {
+        showDateTiemPicker(startDate: Date()) { (date) in
+            self.lblStartDate.text = date
+        }
+    }
+    
+    @objc func selectEndDatePicking(_ sender:UITapGestureRecognizer) {
+        showDateTiemPicker(startDate: self.startDate) { (date) in
+             self.lblEndDate.text = date
+         }
+    }
+    
+    @IBAction func onTouchDiscardBtn(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func onTouchApplyBtn(_ sender: Any) {
     }
     
     //MARK: - Selection Alerts
-    func showLeaveSelectionAlert (leaves : [String:Int]) {
+    func showLeaveSelectionAlert () {
         let alert = UIAlertController(title: "Leave Type", message: "", preferredStyle: .alert)
         alert.view.tintColor = UIColor(named: "BGPrimary")
-
-        for leave in leaves {
-            alert.addAction(UIAlertAction(title: "\(leave.key) - \(leave.value) day(s) left", style: .default, handler: { (_) in
-                self.lblLeaveTitle.text = leave.key
-                self.lblLeaveDayLeft.text = "\(leave.value) days left"
-            }))
-        }
+        
+        alert.addAction(UIAlertAction(title: "Casual Leave - \(self.dashboardResponse?.casualleave ?? 0) day(s) left", style: .default, handler: { (_) in
+            self.lblLeaveTitle.text = "Casual Leave"
+            self.lblLeaveDayLeft.text = "\(self.dashboardResponse?.casualleave ?? 0) days left"
+        }))
+        alert.addAction(UIAlertAction(title: "Annual Leave - \(self.dashboardResponse?.annualleave ?? 0) day(s) left", style: .default, handler: { (_) in
+            self.lblLeaveTitle.text = "Annual Leave"
+            self.lblLeaveDayLeft.text = "\(self.dashboardResponse?.annualleave ?? 0) days left"
+        }))
+        alert.addAction(UIAlertAction(title: "Medical Leave - \(self.dashboardResponse?.medicalleave ?? 0) day(s) left", style: .default, handler: { (_) in
+            self.lblLeaveTitle.text = "Medical Leave"
+            self.lblLeaveDayLeft.text = "\(self.dashboardResponse?.medicalleave ?? 0) days left"
+        }))
+        alert.addAction(UIAlertAction(title: "Maternity Leave - \(dashboardResponse?.maternityleave ?? 0) day(s) left", style: .default, handler: { (_) in
+            self.lblLeaveTitle.text = "Maternity Leave"
+            self.lblLeaveDayLeft.text = "\(self.dashboardResponse?.maternityleave ?? 0) days left"
+        }))
         self.present(alert, animated: true, completion:{
             alert.view.superview?.isUserInteractionEnabled = true
             alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissOnTapOutside)))
@@ -136,25 +163,34 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
         })
     }
     
-    private func showDateTiemPicker() {
-        let alert = UIAlertController(title: "Select Date", message: "\n\n\n\n\n\n", preferredStyle: .alert)
+    private func showDateTiemPicker(startDate : Date, Completion : @escaping (String) -> Void){
+        var selectedDate : String = ""
+        let alert = UIAlertController(title: "Select Date", message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
+        
+        datePicker.minimumDate = startDate
+        
         alert.view.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
-        datePicker.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 20).isActive = true
-        datePicker.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -20).isActive = true
+        datePicker.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 25).isActive = true
+        datePicker.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -25).isActive = true
         datePicker.leftAnchor.constraint(equalTo: alert.view.leftAnchor, constant: 0).isActive = true
         datePicker.rightAnchor.constraint(equalTo: alert.view.rightAnchor, constant: 0).isActive = true
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Select", style: .default, handler: { (_) in
-            
+            self.startDate = datePicker.date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMM,yyyy"
+            selectedDate = dateFormatter.string(from: datePicker.date)
+            Completion(selectedDate)
         }))
         self.present(alert, animated: true, completion:{
             alert.view.superview?.isUserInteractionEnabled = true
             alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissOnTapOutside)))
         })
+        
     }
     
     
