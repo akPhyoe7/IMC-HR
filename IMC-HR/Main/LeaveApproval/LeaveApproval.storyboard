@@ -164,6 +164,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="btnStackView" destination="exh-wa-XHK" id="GCK-x7-c9h"/>
                                             <outlet property="imgProfile" destination="rOC-Hs-84z" id="adV-UK-lfr"/>
                                             <outlet property="lblApproverName" destination="8gx-VX-pX7" id="6Qj-pG-DRB"/>
                                             <outlet property="lblDate" destination="sSq-7Y-ieW" id="ceh-FJ-Cwc"/>

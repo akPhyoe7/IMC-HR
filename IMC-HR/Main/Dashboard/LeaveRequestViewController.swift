@@ -25,6 +25,7 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
     
     var dashboardResponse : DashboardResponse?
     var startDate : Date = Date()
+    var timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,14 +102,14 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func selectStartDatePicking(_ sender:UITapGestureRecognizer) {
-        showDateTiemPicker(startDate: Date()) { (date) in
-            self.lblStartDate.text = date
+        showDateTimePicker(startDate: Date()) { [weak self] (date) in
+            self?.lblStartDate.text = date
         }
     }
     
     @objc func selectEndDatePicking(_ sender:UITapGestureRecognizer) {
-        showDateTiemPicker(startDate: self.startDate) { (date) in
-             self.lblEndDate.text = date
+        showDateTimePicker(startDate: self.startDate) { [weak self] (date) in
+             self?.lblEndDate.text = date
          }
     }
     
@@ -117,10 +118,79 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func onTouchApplyBtn(_ sender: Any) {
+        let alert = UIAlertController(title: "Are you Sure", message: "", preferredStyle: .alert)
+        alert.view.tintColor = UIColor(named: "BGPrimary")
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
+            self.confirmLeaveRequest()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func confirmLeaveRequest() {
+        
+        let type = self.lblLeaveTitle.text ?? ""
+        let typearray = type.components(separatedBy: " ")
+        let leaveType = typearray.first?.uppercased() ?? ""
+        
+        let sDateString = self.lblStartDate.text ?? ""
+        let eDateString = self.lblEndDate.text ?? ""
+        var startDate = ""
+        var endDate = ""
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "dd MMM,yyyy"
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "yyyy-MM-dd"
+
+        if let date = dateFormatterGet.date(from: sDateString) {
+            startDate = dateFormatterPrint.string(from: date)
+        } else {
+           print("There was an error decoding the date string")
+        }
+        if let date = dateFormatterGet.date(from: eDateString) {
+            endDate = dateFormatterPrint.string(from: date)
+        } else {
+            print("There was an error decoding the date string")
+        }
+        
+        var reason = ""
+        let reasonText = self.tvReason.text
+        if reasonText != "Add a Reason" {
+            reason = reasonText ?? ""
+        }
+        
+        let remainDayString = self.lblLeaveDayLeft.text ?? ""
+        let remainDayArray = remainDayString.components(separatedBy: " ")
+        let remainDay = Int(remainDayArray[0])
+        if remainDay == 0 {
+            self.showAndHideCustomAlert(msg: "no leave day left")
+        }else if endDate == "" {
+            self.showAndHideCustomAlert(msg: "must select end date")
+        }else {
+            DataFetcher.sharedInstance.fetchLeaveRequest(leaveType: leaveType, startDate: startDate, endDate: endDate, reason: reason) { [weak self] status in
+                CustomAlertView.shareInstance.showAlert(message: "Loading", alertType: .loading)
+                DispatchQueue.main.async {
+                    if status == "success" {
+                        CustomAlertView.shareInstance.hideAlert()
+                        self?.navigationController?.popViewController(animated: true)
+                    }else{
+                        CustomAlertView.shareInstance.hideAlert()
+                        self?.showAndHideCustomAlert(msg: "error while connecting")
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc func timeExpired() {
+        timer.invalidate()
+        CustomAlertView.shareInstance.hideAlert()
     }
     
     //MARK: - Selection Alerts
-    func showLeaveSelectionAlert () {
+    private func showLeaveSelectionAlert () {
         let alert = UIAlertController(title: "Leave Type", message: "", preferredStyle: .alert)
         alert.view.tintColor = UIColor(named: "BGPrimary")
         
@@ -146,7 +216,7 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
         })
     }
     
-    func showHalfDaySelectionAlert () {
+    private func showHalfDaySelectionAlert () {
         let alert = UIAlertController(title: "Select Type", message: "", preferredStyle: .alert)
         alert.view.tintColor = UIColor(named: "BGPrimary")
         
@@ -163,7 +233,7 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
         })
     }
     
-    private func showDateTiemPicker(startDate : Date, Completion : @escaping (String) -> Void){
+    private func showDateTimePicker(startDate : Date, Completion : @escaping (String) -> Void){
         var selectedDate : String = ""
         let alert = UIAlertController(title: "Select Date", message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         let datePicker = UIDatePicker()
@@ -233,14 +303,10 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
         scrollView.contentInset = contentInset
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    private func showAndHideCustomAlert(msg : String) {
+        CustomAlertView.shareInstance.showAlert(message: msg, alertType: .fail)
+        self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(self.timeExpired), userInfo: nil, repeats: false)
     }
-    */
 
 }

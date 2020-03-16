@@ -81,6 +81,41 @@ class DataFetcher {
                     Completion(resData?["msg"] ?? "success")
                 case let .failure(error):
                     print(error.localizedDescription)
+                    Completion("error")
+                }
+        }.resume()
+    }
+    
+    func fetchLeaveApprove (leaveID : Int, Completion : @escaping (String) -> Void) {
+        let route = URL(string: "\(Routes.Post.leaveApprove)\(leaveID)")!
+        AF.request(route,
+                   method: .post,
+                   headers: headers)
+            .responseJSON{ (response) in
+                switch response.result {
+                case .success(let data):
+                    let resData = data as? [String:String]
+                    Completion(resData?["msg"] ?? "success")
+                case let .failure(error):
+                    print(error.localizedDescription)
+                    Completion("error")
+                }
+        }.resume()
+    }
+    
+    func fetchLeaveCancel (leaveID : Int, Completion : @escaping (String) -> Void) {
+        let route = URL(string: "\(Routes.Post.leaveCancel)\(leaveID)")!
+        AF.request(route,
+                   method: .post,
+                   headers: headers)
+            .responseJSON{ (response) in
+                switch response.result {
+                case .success(let data):
+                    let resData = data as? [String:String]
+                    Completion(resData?["msg"] ?? "success")
+                case let .failure(error):
+                    print(error.localizedDescription)
+                    Completion("error")
                 }
         }.resume()
     }
