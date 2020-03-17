@@ -102,10 +102,11 @@ class DashboardViewController: UIViewController {
                 self?.bindDashboardData(data: dashboardResponse)
             }
         }
+        CustomAlertView.shareInstance.hideAlert()
     }
     
     fileprivate func bindDashboardData(data : DashboardResponse) {
-        CustomAlertView.shareInstance.hideAlert()
+        
         let photoUrl = data.photoUrl ?? ""
         self.imgProfile.sd_setImage(with: URL(string: photoUrl), placeholderImage: UIImage(named: "img_IMCLogo"))
         self.lblName.text = data.name

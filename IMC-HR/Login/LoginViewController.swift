@@ -51,7 +51,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         CustomAlertView.shareInstance.hideAlert()
         if data.authenticated! {
             let saveStatus: Bool = KeychainWrapper.standard.set(data.authenticationToken!, forKey: "auth")
-            print("Keychain save : ", saveStatus)
             if saveStatus {
                 self.performSegue(withIdentifier: "gotoMain", sender: self)
             }else{
@@ -60,6 +59,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }else{
             CustomAlertView.shareInstance.showAlert(message: data.errorMessage!, alertType: .statusFail)
         }
+        self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(self.timeExpired), userInfo: nil, repeats: false)
     }
     
     @IBAction func onTouchShowPwdBtn(_ sender: Any) {

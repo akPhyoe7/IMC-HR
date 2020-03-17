@@ -28,6 +28,7 @@
 		847D3C912419DEF400D11E4D /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D3C902419DEF400D11E4D /* DataFetcher.swift */; };
 		847D3C942419F73D00D11E4D /* DashboardItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D3C932419F73D00D11E4D /* DashboardItemData.swift */; };
 		847D3C962419FD0400D11E4D /* DashboardVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D3C952419FD0400D11E4D /* DashboardVO.swift */; };
+		8480ED6924212A8100E26568 /* WidgetGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480ED6824212A8100E26568 /* WidgetGenerator.swift */; };
 		84AFCD9424134073002743D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFCD9324134073002743D3 /* AppDelegate.swift */; };
 		84AFCD9824134073002743D3 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFCD9724134073002743D3 /* DashboardViewController.swift */; };
 		84AFCD9B24134073002743D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84AFCD9924134073002743D3 /* Main.storyboard */; };
@@ -91,6 +92,7 @@
 		847D3C902419DEF400D11E4D /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 		847D3C932419F73D00D11E4D /* DashboardItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardItemData.swift; sourceTree = "<group>"; };
 		847D3C952419FD0400D11E4D /* DashboardVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVO.swift; sourceTree = "<group>"; };
+		8480ED6824212A8100E26568 /* WidgetGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetGenerator.swift; sourceTree = "<group>"; };
 		84AFCD9024134073002743D3 /* IMC-HR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IMC-HR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84AFCD9324134073002743D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84AFCD9724134073002743D3 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				8451D3CE241B4F8600FE9500 /* Objc-Bridge-Header.h */,
+				8480ED6824212A8100E26568 /* WidgetGenerator.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 				84AFCD9424134073002743D3 /* AppDelegate.swift in Sources */,
 				842828A4241A860D00942584 /* AttendanceResponse.swift in Sources */,
 				846DA9822414C9BD003F7071 /* LeaveRequestViewController.swift in Sources */,
+				8480ED6924212A8100E26568 /* WidgetGenerator.swift in Sources */,
 				846DA98A2414CDAD003F7071 /* API.swift in Sources */,
 				842FDEF824176EEC00E17C70 /* PayslipDetailViewController.swift in Sources */,
 				8451D3CD241B467B00FE9500 /* PayslipDetailResponse.swift in Sources */,

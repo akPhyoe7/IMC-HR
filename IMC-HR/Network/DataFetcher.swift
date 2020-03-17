@@ -13,10 +13,6 @@ class DataFetcher {
     
     static let sharedInstance = DataFetcher()
     
-    let headers : HTTPHeaders = [
-        "auth" : API.auth
-    ]
-    
     private init() {}
     
     //MARK: - POST REQUESTS
@@ -88,6 +84,9 @@ class DataFetcher {
     
     func fetchLeaveApprove (leaveID : Int, Completion : @escaping (String) -> Void) {
         let route = URL(string: "\(Routes.Post.leaveApprove)\(leaveID)")!
+        let headers : HTTPHeaders = [
+            "auth" : API.auth
+        ]
         AF.request(route,
                    method: .post,
                    headers: headers)
@@ -105,6 +104,9 @@ class DataFetcher {
     
     func fetchLeaveCancel (leaveID : Int, Completion : @escaping (String) -> Void) {
         let route = URL(string: "\(Routes.Post.leaveCancel)\(leaveID)")!
+        let headers : HTTPHeaders = [
+            "auth" : API.auth
+        ]
         AF.request(route,
                    method: .post,
                    headers: headers)
@@ -123,6 +125,9 @@ class DataFetcher {
     //MARK: - GET REQUESTS
     func fetchCampusRange (Completion : @escaping ([CampusRangeResponse]) -> Void) {
         let route = URL(string: Routes.Get.campusRange)!
+        let headers : HTTPHeaders = [
+            "auth" : API.auth
+        ]
         AF.request(route,
                    method: .get,
                    headers: headers)
@@ -143,6 +148,9 @@ class DataFetcher {
     
     func fetchDashboard (Completion : @escaping (DashboardResponse) -> Void) {
         let route = URL(string: Routes.Get.dashboard)!
+        let headers : HTTPHeaders = [
+            "auth" : API.auth
+        ]
         AF.request(route,
                    method: .get,
                    headers: headers)
@@ -162,6 +170,9 @@ class DataFetcher {
     
     func fetchCheckIn (Completion : @escaping (String) -> Void) {
         let route = URL(string: Routes.Get.checkIn)!
+        let headers : HTTPHeaders = [
+            "auth" : API.auth
+        ]
         AF.request(route,
                    method: .get,
                    headers: headers)
@@ -184,6 +195,9 @@ class DataFetcher {
     
     func fetchCheckOut (Completion : @escaping (String) -> Void) {
         let route = URL(string: Routes.Get.checkOut)!
+        let headers : HTTPHeaders = [
+            "auth" : API.auth
+        ]
         AF.request(route,
                    method: .get,
                    headers: headers)
@@ -206,6 +220,9 @@ class DataFetcher {
     
     func fetchAttendanceList (Completion : @escaping ([AttendanceResponse]) -> Void) {
         let route = URL(string: Routes.Get.attendanceList)!
+        let headers : HTTPHeaders = [
+            "auth" : API.auth
+        ]
         AF.request(route,
                    method: .get,
                    headers: headers)
@@ -225,6 +242,9 @@ class DataFetcher {
     
     func fetchPayslipList (Completion : @escaping ([PayslipResponse]) -> Void) {
         let route = URL(string: Routes.Get.payslip)!
+        let headers : HTTPHeaders = [
+            "auth" : API.auth
+        ]
         AF.request(route,
                    method: .get,
                    headers: headers)
@@ -244,6 +264,9 @@ class DataFetcher {
     
     func fetchPayslipDetail (payslipId : Int!, Completion : @escaping (PayslipDetailResponse) -> Void) {
         let route = URL(string: "\(Routes.Get.payslipDetail)\(payslipId!)")!
+        let headers : HTTPHeaders = [
+            "auth" : API.auth
+        ]
         AF.request(route,
                    method: .get,
                    headers: headers)
@@ -263,6 +286,9 @@ class DataFetcher {
     
     func fetchLeaveApprovalList (Completion : @escaping (LeaveApprovalListResponse) -> Void) {
         let route = URL(string: Routes.Get.leaveList)!
+        let headers : HTTPHeaders = [
+            "auth" : API.auth
+        ]
         AF.request(route,
                    method: .get,
                    headers: headers)
