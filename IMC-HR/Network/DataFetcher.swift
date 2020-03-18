@@ -106,7 +106,7 @@ class DataFetcher {
     func fetchLeaveCancel (leaveID : Int, Completion : @escaping (String) -> Void) {
         let route = URL(string: "\(Routes.Post.leaveCancel)\(leaveID)")!
         let headers : HTTPHeaders = [
-            "auth" : API.auth
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
         ]
         AF.request(route,
                    method: .post,
@@ -127,7 +127,7 @@ class DataFetcher {
     func fetchCampusRange (Completion : @escaping ([CampusRangeResponse]) -> Void) {
         let route = URL(string: Routes.Get.campusRange)!
         let headers : HTTPHeaders = [
-            "auth" : API.auth
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
         ]
         AF.request(route,
                    method: .get,

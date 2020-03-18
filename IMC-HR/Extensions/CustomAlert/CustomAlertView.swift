@@ -84,7 +84,7 @@ class CustomAlertView: UIView {
             frontView.addSubview(imgStatus)
             imgStatus.translatesAutoresizingMaskIntoConstraints = false
             imgStatus.centerXAnchor.constraint(equalTo: frontView.centerXAnchor).isActive = true
-            imgStatus.centerYAnchor.constraint(equalTo: frontView.centerYAnchor, constant: -20).isActive = true
+            imgStatus.centerYAnchor.constraint(equalTo: frontView.centerYAnchor, constant: -25).isActive = true
             
             //label color
             lblMessage.textColor = .red

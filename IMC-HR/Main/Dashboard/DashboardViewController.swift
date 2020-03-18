@@ -8,8 +8,9 @@
 
 import UIKit
 import SDWebImage
+import CoreLocation
 
-class DashboardViewController: UIViewController {
+class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblName: UILabel!
@@ -24,9 +25,13 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var lblMaternityDays: UILabel!
     @IBOutlet weak var dashboardItemCollectionView: UICollectionView!
     
-    let dashboardItemList : [itemData] = dashboardItemsData.sharedInstance.items
+    let locationManager = CLLocationManager()
+    var locValue = CLLocationCoordinate2D()
+    var dashboardItemList : [itemData] = dashboardItemsData.sharedInstance.items
     var dashboardData : DashboardResponse!
     var timer = Timer()
+    var distances : [Double] = []
+    var LocationInRange : Bool! = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +41,15 @@ class DashboardViewController: UIViewController {
         
         self.imgProfile.layer.cornerRadius = imgProfile.frame.height / 2
         
+        locationManager.requestWhenInUseAuthorization()
+        
+        getDeviceLocation()
+        
         initCampusRangeFetchRequest()
         
         initDashboardFetchRequest()
         
         setCollectionViewLayout()
-        
         dashboardItemCollectionView.reloadData()
     }
     
@@ -57,24 +65,34 @@ class DashboardViewController: UIViewController {
     
     
     @IBAction func onTouchCheckInBtn(_ sender: Any) {
-        DataFetcher.sharedInstance.fetchCheckIn() { message in
-            if message == "success" {
-                CustomAlertView.shareInstance.showAlert(message: "Checkin Successful", alertType: .success)
-            } else {
-                CustomAlertView.shareInstance.showAlert(message: "Checkin Fail", alertType: .fail)
+        if self.LocationInRange {
+            DataFetcher.sharedInstance.fetchCheckIn() { message in
+                if message == "success" {
+                    CustomAlertView.shareInstance.showAlert(message: "Checkin Successful", alertType: .success)
+                } else {
+                    CustomAlertView.shareInstance.showAlert(message: "Checkin Fail", alertType: .fail)
+                }
+                self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(self.timeExpired), userInfo: nil, repeats: false)
             }
-            self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(self.timeExpired), userInfo: nil, repeats: false)
+        } else {
+            CustomAlertView.shareInstance.showAlert(message: "Out of range! Move closer to office and try again.", alertType: .warning)
+            self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(self.timeExpired), userInfo: nil, repeats: false)
         }
     }
     
     @IBAction func onTouchCheckOutBtn(_ sender: Any) {
-        DataFetcher.sharedInstance.fetchCheckOut() { message in
-            if message == "success" {
-                CustomAlertView.shareInstance.showAlert(message: "Checkout Successful", alertType: .success)
-            } else {
-                CustomAlertView.shareInstance.showAlert(message: "Checkout Fail", alertType: .fail)
+        if self.LocationInRange {
+            DataFetcher.sharedInstance.fetchCheckOut() { message in
+                if message == "success" {
+                    CustomAlertView.shareInstance.showAlert(message: "Checkout Successful", alertType: .success)
+                } else {
+                    CustomAlertView.shareInstance.showAlert(message: "Checkout Fail", alertType: .fail)
+                }
+                self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(2.0), target: self, selector: #selector(self.timeExpired), userInfo: nil, repeats: false)
             }
-            self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(self.timeExpired), userInfo: nil, repeats: false)
+        } else {
+            CustomAlertView.shareInstance.showAlert(message: "Out of range! Move closer to office and try again.", alertType: .warning)
+            self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(2.0), target: self, selector: #selector(self.timeExpired), userInfo: nil, repeats: false)
         }
     }
     
@@ -84,13 +102,57 @@ class DashboardViewController: UIViewController {
     }
     
     fileprivate func initCampusRangeFetchRequest() {
-        DataFetcher.sharedInstance.fetchCampusRange() { campusRanges in
+        DataFetcher.sharedInstance.fetchCampusRange() { [weak self] campusRanges in
             DispatchQueue.main.async {
-                campusRanges.forEach{ CampusRange in
+                for CampusRange in campusRanges {
                     print("campus ranges : ", CampusRange)
+                    let distance = self?.getDistanceFromCampusRange(Range: CampusRange)
+                    self?.distances.append(distance ?? 0.0)
                 }
+                self?.LocationInRange = self?.checkNearestCampus(distances: (self?.distances)!)
             }
         }
+    }
+    
+    //get device location for distance check
+    fileprivate func getDeviceLocation() {
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        self.locValue = locValue
+        locationManager.stopUpdatingLocation()
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+    
+    //compare distance from current location to fetch network location and reture distanc array
+    fileprivate func getDistanceFromCampusRange(Range : CampusRangeResponse) -> Double {
+        let latString = Range.latitude ?? ""
+        let longString = Range.longitude ?? ""
+        let lat = Double(latString)!
+        let long = Double(longString)!
+        let location = CLLocationCoordinate2D.init(latitude: lat, longitude: long)
+        
+        let distance = self.locValue.distance(from: location)
+        print("current loc : \(self.locValue)")
+        let distanceKM = distance/1000
+        print("distance between two coordinates : \(distanceKM)")
+        return distanceKM
+    }
+    
+    //check distance is less than 1KM Range
+    fileprivate func checkNearestCampus(distances : [Double]) -> Bool {
+        for dist in distances {
+            if dist < 1.0 {
+                return true
+            }
+        }
+        return false
     }
     
     fileprivate func initDashboardFetchRequest() {
@@ -118,7 +180,7 @@ class DashboardViewController: UIViewController {
         self.lblMaternityDays.text = String(data.maternityleave ?? 0)
     }
     
-    //Setup CollectionView Layout
+    //MARK: -Setup CollectionView Layout
     fileprivate func setCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -207,5 +269,13 @@ class DashboardItemCollectionViewCell : UICollectionViewCell {
     
     static var identifier : String {
         return String(describing: self)
+    }
+}
+
+extension CLLocationCoordinate2D {
+    //distance in meters, as explained in CLLoactionDistance definition
+    func distance(from: CLLocationCoordinate2D) -> CLLocationDistance {
+        let destination=CLLocation(latitude:from.latitude,longitude:from.longitude)
+        return CLLocation(latitude: latitude, longitude: longitude).distance(from: destination)
     }
 }

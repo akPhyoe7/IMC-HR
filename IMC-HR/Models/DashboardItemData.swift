@@ -36,10 +36,10 @@ class dashboardItemsData {
             itemData(iconImg: "icon_payslip", itemLabel: "Payslip", segueName: "gotoPayslip"),
             itemData(iconImg: "icon_profile", itemLabel: "Profile", segueName: "gotoProfile")
         ]
-    }
-    
-    func addLeaveApproval() {
-        items.insert(leaveApprovalItem, at: 2)
+        
+//        if UserDefaults.standard.bool(forKey: "CanApprove"){
+//            items.insert(leaveApprovalItem, at: 2)
+//        }
     }
     
     func count() -> Int{

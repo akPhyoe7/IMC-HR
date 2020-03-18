@@ -58,5 +58,11 @@
 	</dict>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>IMC-HR wants to use your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>IMC-HR wants to use your location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>IMC-HR wants to use your location</string>
 </dict>
 </plist>
