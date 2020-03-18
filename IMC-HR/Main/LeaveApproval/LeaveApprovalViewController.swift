@@ -18,6 +18,7 @@ class LeaveApprovalViewController: UIViewController, ReloadFormCell {
         super.viewDidLoad()
 
         self.leaveApprovalTableView.separatorColor = .clear
+        self.leaveApprovalTableView.allowsSelection = false
         
         initLeaveApprovalListFetchRequest()
     }
@@ -110,9 +111,10 @@ class LeaveApprovalTableViewCell: UITableViewCell {
         guard let id = data?.id else {
             return
         }
-        DataFetcher.sharedInstance.fetchLeaveApprove(leaveID: id) { message in
+        DataFetcher.sharedInstance.fetchLeaveApprove(leaveID: id) { [weak self] message in
             if message == "success" {
                 CustomAlertView.shareInstance.showAlert(message: "Approve Success", alertType: .success)
+                self?.delegate?.updateTableView()
             } else {
                 CustomAlertView.shareInstance.showAlert(message: "Approve Fail", alertType: .fail)
             }
@@ -125,9 +127,10 @@ class LeaveApprovalTableViewCell: UITableViewCell {
         guard let id = data?.id else {
             return
         }
-        DataFetcher.sharedInstance.fetchLeaveApprove(leaveID: id) { message in
+        DataFetcher.sharedInstance.fetchLeaveApprove(leaveID: id) { [weak self] message in
             if message == "success" {
                 CustomAlertView.shareInstance.showAlert(message: "Reject Success", alertType: .success)
+                self?.delegate?.updateTableView()
             } else {
                 CustomAlertView.shareInstance.showAlert(message: "Reject Fail", alertType: .fail)
             }

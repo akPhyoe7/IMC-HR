@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftKeychainWrapper
 
 class DataFetcher {
     
@@ -52,7 +53,7 @@ class DataFetcher {
         let route = URL(string: Routes.Post.requestLeave)!
         let postHeaders : HTTPHeaders = [
             "Content-Type" : "application/json",
-            "auth" : API.auth
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
         ]
         let params : Parameters = [
             "leaveType" : leaveType,
@@ -85,7 +86,7 @@ class DataFetcher {
     func fetchLeaveApprove (leaveID : Int, Completion : @escaping (String) -> Void) {
         let route = URL(string: "\(Routes.Post.leaveApprove)\(leaveID)")!
         let headers : HTTPHeaders = [
-            "auth" : API.auth
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
         ]
         AF.request(route,
                    method: .post,
@@ -149,7 +150,7 @@ class DataFetcher {
     func fetchDashboard (Completion : @escaping (DashboardResponse) -> Void) {
         let route = URL(string: Routes.Get.dashboard)!
         let headers : HTTPHeaders = [
-            "auth" : API.auth
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
         ]
         AF.request(route,
                    method: .get,
@@ -171,7 +172,7 @@ class DataFetcher {
     func fetchCheckIn (Completion : @escaping (String) -> Void) {
         let route = URL(string: Routes.Get.checkIn)!
         let headers : HTTPHeaders = [
-            "auth" : API.auth
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
         ]
         AF.request(route,
                    method: .get,
@@ -196,7 +197,7 @@ class DataFetcher {
     func fetchCheckOut (Completion : @escaping (String) -> Void) {
         let route = URL(string: Routes.Get.checkOut)!
         let headers : HTTPHeaders = [
-            "auth" : API.auth
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
         ]
         AF.request(route,
                    method: .get,
@@ -221,7 +222,7 @@ class DataFetcher {
     func fetchAttendanceList (Completion : @escaping ([AttendanceResponse]) -> Void) {
         let route = URL(string: Routes.Get.attendanceList)!
         let headers : HTTPHeaders = [
-            "auth" : API.auth
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
         ]
         AF.request(route,
                    method: .get,
@@ -243,7 +244,7 @@ class DataFetcher {
     func fetchPayslipList (Completion : @escaping ([PayslipResponse]) -> Void) {
         let route = URL(string: Routes.Get.payslip)!
         let headers : HTTPHeaders = [
-            "auth" : API.auth
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
         ]
         AF.request(route,
                    method: .get,
@@ -265,7 +266,7 @@ class DataFetcher {
     func fetchPayslipDetail (payslipId : Int!, Completion : @escaping (PayslipDetailResponse) -> Void) {
         let route = URL(string: "\(Routes.Get.payslipDetail)\(payslipId!)")!
         let headers : HTTPHeaders = [
-            "auth" : API.auth
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
         ]
         AF.request(route,
                    method: .get,
@@ -287,7 +288,7 @@ class DataFetcher {
     func fetchLeaveApprovalList (Completion : @escaping (LeaveApprovalListResponse) -> Void) {
         let route = URL(string: Routes.Get.leaveList)!
         let headers : HTTPHeaders = [
-            "auth" : API.auth
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
         ]
         AF.request(route,
                    method: .get,
