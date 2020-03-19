@@ -49,4 +49,13 @@ class WidgetGenerator {
         return view
         
     }
+    
+    static func getLabel(_ text : String = "") -> UILabel {
+        let ui = UILabel()
+        ui.font = UIFont.systemFont(ofSize: 15)
+        ui.numberOfLines = 0
+        ui.text = text
+        ui.textColor = UIColor.darkGray
+        return ui
+    }
 }

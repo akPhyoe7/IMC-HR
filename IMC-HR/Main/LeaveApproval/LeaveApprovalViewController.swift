@@ -13,6 +13,7 @@ class LeaveApprovalViewController: UIViewController, ReloadFormCell {
     @IBOutlet weak var leaveApprovalTableView: UITableView!
     
     var leaveApproveList : LeaveApprovalListResponse?
+    var lblNotApprove = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +24,33 @@ class LeaveApprovalViewController: UIViewController, ReloadFormCell {
         initLeaveApprovalListFetchRequest()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.lblNotApprove.removeFromSuperview()
+        self.leaveApprovalTableView.isHidden = false
+    }
+    
     private func initLeaveApprovalListFetchRequest() {
         DataFetcher.sharedInstance.fetchLeaveApprovalList() { [weak self] leaveList in
             DispatchQueue.main.async {
                 self?.leaveApproveList = leaveList
-                self?.leaveApprovalTableView.reloadData()
+                let canApprove = leaveList.canApprove ?? false
+                if canApprove {
+                    self?.leaveApprovalTableView.reloadData()
+                } else {
+                    self?.addCantApproveLbl()
+                }
             }
         }
+    }
+    
+    fileprivate func addCantApproveLbl() {
+        self.leaveApprovalTableView.isHidden = true
+        self.lblNotApprove = WidgetGenerator.getLabel("You Can't Approve Leaves!")
+        self.view.addSubview(self.lblNotApprove)
+        self.lblNotApprove.translatesAutoresizingMaskIntoConstraints = false
+        self.lblNotApprove.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        self.lblNotApprove.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0).isActive = true
     }
     
     func updateTableView() {

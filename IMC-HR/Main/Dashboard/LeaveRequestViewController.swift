@@ -48,6 +48,8 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
     }
     
     fileprivate func initValues () {
+        self.selectHalfDayView.isHidden = true
+        self.scLeaveTime.isHidden = true
         // set leave type
         self.lblLeaveTitle.text = "Casual Leave"
         self.lblLeaveDayLeft.text = "\(self.dashboardResponse?.casualleave ?? 0) day(s) left"
