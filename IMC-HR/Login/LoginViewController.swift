@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftKeychainWrapper
+import CoreLocation
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
@@ -17,10 +18,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var btnShowPwd: UIButton!
     
     var timer = Timer()
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.requestWhenInUseAuthorization()
         registerKeyboardObserver()
         
         self.tfEmail.delegate = self

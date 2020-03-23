@@ -31,7 +31,6 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     var dashboardData : DashboardResponse!
     var timer = Timer()
     var distances : [Double] = []
-    var LocationInRange : Bool! = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +39,6 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "BGPrimary")!]
         
         self.imgProfile.layer.cornerRadius = imgProfile.frame.height / 2
-        
-        locationManager.requestWhenInUseAuthorization()
-        
-        getDeviceLocation()
-        
-        initCampusRangeFetchRequest()
         
         initDashboardFetchRequest()
         
@@ -65,7 +58,33 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func onTouchCheckInBtn(_ sender: Any) {
-        if self.LocationInRange {
+        getDeviceLocation()
+        initCampusRangeFetchRequestForCheckIn()
+    }
+    
+    @IBAction func onTouchCheckOutBtn(_ sender: Any) {
+        getDeviceLocation()
+        initCampusRangeFetchRequestForCheckOut()
+        
+    }
+    
+    //CHECKIN check by pressing check in button
+    fileprivate func initCampusRangeFetchRequestForCheckIn() {
+        DataFetcher.sharedInstance.fetchCampusRange() { [weak self] campusRanges in
+            DispatchQueue.main.async {
+                for CampusRange in campusRanges {
+                    print("campus ranges : ", CampusRange)
+                    let distance = self?.getDistanceFromCampusRange(Range: CampusRange)
+                    self?.distances.append(distance ?? 0.0)
+                }
+                let LocationInRange = self?.checkNearestCampus(distances: (self?.distances)!)
+                self?.initCheckInFetchingRequest(locInRange: LocationInRange ?? false)
+            }
+        }
+    }
+    
+    fileprivate func initCheckInFetchingRequest(locInRange : Bool) {
+        if locInRange{
             DataFetcher.sharedInstance.fetchCheckIn() { message in
                 if message == "success" {
                     CustomAlertView.shareInstance.showAlert(message: "Checkin Successful", alertType: .success)
@@ -80,8 +99,23 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    @IBAction func onTouchCheckOutBtn(_ sender: Any) {
-        if self.LocationInRange {
+    //CHECKOUT check by pressing check in button
+    fileprivate func initCampusRangeFetchRequestForCheckOut() {
+        DataFetcher.sharedInstance.fetchCampusRange() { [weak self] campusRanges in
+            DispatchQueue.main.async {
+                for CampusRange in campusRanges {
+                    print("campus ranges : ", CampusRange)
+                    let distance = self?.getDistanceFromCampusRange(Range: CampusRange)
+                    self?.distances.append(distance ?? 0.0)
+                }
+                let LocationInRange = self?.checkNearestCampus(distances: (self?.distances)!)
+                self?.initCheckOutFetchingRequest(locInRange: LocationInRange ?? false)
+            }
+        }
+    }
+    
+    fileprivate func initCheckOutFetchingRequest(locInRange : Bool) {
+        if locInRange {
             DataFetcher.sharedInstance.fetchCheckOut() { message in
                 if message == "success" {
                     CustomAlertView.shareInstance.showAlert(message: "Checkout Successful", alertType: .success)
@@ -96,22 +130,10 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    
     @objc func timeExpired() {
         timer.invalidate()
         CustomAlertView.shareInstance.hideAlert()
-    }
-    
-    fileprivate func initCampusRangeFetchRequest() {
-        DataFetcher.sharedInstance.fetchCampusRange() { [weak self] campusRanges in
-            DispatchQueue.main.async {
-                for CampusRange in campusRanges {
-                    print("campus ranges : ", CampusRange)
-                    let distance = self?.getDistanceFromCampusRange(Range: CampusRange)
-                    self?.distances.append(distance ?? 0.0)
-                }
-                self?.LocationInRange = self?.checkNearestCampus(distances: (self?.distances)!)
-            }
-        }
     }
     
     //get device location for distance check
