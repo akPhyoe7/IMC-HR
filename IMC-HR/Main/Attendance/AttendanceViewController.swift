@@ -11,48 +11,77 @@ import UIKit
 class AttendanceViewController: UIViewController {
 
     @IBOutlet weak var attendanceTableView: UITableView!
+    @IBOutlet weak var scSelectMonth: UISegmentedControl!
     
-    var attendanceList : [AttendanceResponse]?
-    @IBOutlet weak var lblMonth: UILabel!
+    var attendanceList : Attendance?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.attendanceTableView.separatorColor = .clear
-        initAttendanceListFetchRequest()
+        customizeSC()
+        initAttendanceListFetchRequest(month: "")
     }
     
-    private func initAttendanceListFetchRequest() {
-        DataFetcher.sharedInstance.fetchAttendanceList() { [weak self] attendanceList in
+    private func customizeSC() {
+        self.scSelectMonth.backgroundColor = .clear
+        self.scSelectMonth.tintColor = .clear
+        self.scSelectMonth.setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor: UIColor.darkGray,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)], for: .normal)
+
+        // Change text color and the font of the selected segment
+        self.scSelectMonth.setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor: UIColor(named: "BGPrimary") ?? UIColor.blue,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .semibold)], for: .selected)
+        self.scSelectMonth.selectedSegmentIndex = 2
+    }
+    
+    private func initAttendanceListFetchRequest(month : String) {
+        CustomAlertView.shareInstance.showAlert(message: "Loading...", alertType: .loading)
+        DataFetcher.sharedInstance.fetchAttendanceList(month: month) { [weak self] attendanceList in
             DispatchQueue.main.async {
+                CustomAlertView.shareInstance.hideAlert()
                 self?.attendanceList = attendanceList
-                self?.getMonthData()
+                self?.setDataToMonthSegment(months: attendanceList.monthlist)
                 self?.attendanceTableView.reloadData()
             }
         }
     }
     
-    private func getMonthData () {
-        if !((self.attendanceList?.count) != nil) {
-            let firstData = self.attendanceList?[0]
-            let dateString = firstData?.date ?? ""
-            var finalDateString = ""
-            let dateFormatterGet = DateFormatter()
-            dateFormatterGet.dateFormat = "dd-MM-yyyy"
-
-            let dateFormatterPrint = DateFormatter()
-            dateFormatterPrint.dateFormat = "E MMMM dd yyyy"
-
-            if let date = dateFormatterGet.date(from: dateString) {
-                finalDateString = dateFormatterPrint.string(from: date)
-                print(finalDateString)
-            } else {
-               print("There was an error decoding the date string")
-            }
-            let dateArray = finalDateString.components(separatedBy: " ")
-            self.lblMonth.text = dateArray[1]
-        }
+    private func setDataToMonthSegment(months : [String]) {
+        self.scSelectMonth.setTitle(months[0], forSegmentAt: 2)
+        self.scSelectMonth.setTitle(months[1], forSegmentAt: 1)
+        self.scSelectMonth.setTitle(months[2], forSegmentAt: 0)
     }
+    
+    @IBAction func selectMonthSegment(_ sender: UISegmentedControl) {
+        let selectedIndex = sender.selectedSegmentIndex
+        let monthList = self.attendanceList?.monthlist.count ?? 3
+        let selectedMonth = self.attendanceList?.monthlist[monthList - selectedIndex - 1]
+        initAttendanceListFetchRequest(month: selectedMonth ?? "")
+    }
+    //    private func getMonthData () {
+//        if !((self.attendanceList?.staffAttendanceRep.count) != nil) {
+//            let firstData = self.attendanceList?.staffAttendanceRep[0]
+//            let dateString = firstData?.date ?? ""
+//            var finalDateString = ""
+//            let dateFormatterGet = DateFormatter()
+//            dateFormatterGet.dateFormat = "dd-MM-yyyy"
+//
+//            let dateFormatterPrint = DateFormatter()
+//            dateFormatterPrint.dateFormat = "E MMMM dd yyyy"
+//
+//            if let date = dateFormatterGet.date(from: dateString) {
+//                finalDateString = dateFormatterPrint.string(from: date)
+//                print(finalDateString)
+//            } else {
+//               print("There was an error decoding the date string")
+//            }
+//            let dateArray = finalDateString.components(separatedBy: " ")
+//            self.lblMonth.text = dateArray[1]
+//        }
+//    }
 }
 
 //MARK: - TableViewSources
@@ -62,11 +91,11 @@ extension AttendanceViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return attendanceList?.count ?? 0
+        return attendanceList?.staffAttendanceRep.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let attendance = self.attendanceList?[indexPath.row]
+        let attendance = self.attendanceList?.staffAttendanceRep[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AttendanceTableViewCell.identifier, for: indexPath) as? AttendanceTableViewCell else {
             return UITableViewCell()
         }
@@ -88,8 +117,9 @@ class AttendanceTableViewCell : UITableViewCell {
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblArrivalTime: UILabel!
     @IBOutlet weak var lblDepartureTime: UILabel!
+    @IBOutlet weak var lblAttendanceStatus: UILabel!
     
-    var data : AttendanceResponse? {
+    var data : StaffAttendanceRep? {
         didSet {
             if let data = data {
                 let dateString = data.date ?? ""
@@ -110,6 +140,12 @@ class AttendanceTableViewCell : UITableViewCell {
                 lblDate.text = dateArray[2]
                 lblArrivalTime.text = data.arrivalTime
                 lblDepartureTime.text = data.departureTime
+                lblAttendanceStatus.text = data.attendanceStatus
+                if data.attendanceStatus == "PRESENT" {
+                    lblAttendanceStatus.backgroundColor = UIColor(named: "BGGreen")
+                }else{
+                    lblAttendanceStatus.backgroundColor = UIColor.red
+                }
             }
         }
     }

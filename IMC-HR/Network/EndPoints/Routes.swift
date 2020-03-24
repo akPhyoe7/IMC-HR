@@ -28,9 +28,6 @@ struct Routes {
         /// must provide payslip id at the end
         static let payslipDetail = API.BASE_URL + "/rest/hr/payslip/detail/"
         
-        /// Attendance List route.
-        static let attendanceList = API.BASE_URL + "/rest/hr/attendance"
-        
         /// Leave Approval List route.
         static let leaveList = API.BASE_URL + "/rest/hr/leave/leavelist"
     }
@@ -39,6 +36,9 @@ struct Routes {
         
         /// Sign in User
         static let signIn = API.BASE_URL + "/rest/user/auth"
+        
+        /// Attendance List route.
+        static let attendanceList = API.BASE_URL + "/rest/hr/attendance"
         
         /// Leave Appriove
         /// must provide leave id

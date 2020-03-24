@@ -122,6 +122,33 @@ class DataFetcher {
                 }
         }.resume()
     }
+    
+    func fetchAttendanceList (month : String, Completion : @escaping (Attendance) -> Void) {
+        let route = URL(string: Routes.Post.attendanceList)!
+        let headers : HTTPHeaders = [
+            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
+        ]
+        let params : Parameters = [
+            "month" : month
+        ]
+        AF.request(route,
+                   method: .post,
+                   parameters: params,
+                   encoding: JSONEncoding.default,
+                   headers: headers)
+            .responseJSON{ (response) in
+                switch response.result {
+                case .success(_):
+                    if let result = try? JSONDecoder().decode(Attendance.self, from: response.data!) {
+                        Completion(result)
+                    } else {
+                        print("failed to decode data in attendance list")
+                    }
+                case let .failure(error):
+                    print(error)
+                }
+        }.resume()
+    }
  
     //MARK: - GET REQUESTS
     func fetchCampusRange (Completion : @escaping ([CampusRangeResponse]) -> Void) {
@@ -215,28 +242,6 @@ class DataFetcher {
                 case let .failure(error):
                     print(error)
                     Completion("error")
-                }
-        }.resume()
-    }
-    
-    func fetchAttendanceList (Completion : @escaping ([AttendanceResponse]) -> Void) {
-        let route = URL(string: Routes.Get.attendanceList)!
-        let headers : HTTPHeaders = [
-            "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
-        ]
-        AF.request(route,
-                   method: .get,
-                   headers: headers)
-            .responseJSON{ (response) in
-                switch response.result {
-                case .success(_):
-                    if let result = try? JSONDecoder().decode([AttendanceResponse].self, from: response.data!) {
-                        Completion(result)
-                    } else {
-                        print("failed to decode data in attendance list")
-                    }
-                case let .failure(error):
-                    print(error)
                 }
         }.resume()
     }

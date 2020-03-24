@@ -30,7 +30,6 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     var dashboardItemList : [itemData] = dashboardItemsData.sharedInstance.items
     var dashboardData : DashboardResponse!
     var timer = Timer()
-    var distances : [Double] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,11 +57,13 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func onTouchCheckInBtn(_ sender: Any) {
+        CustomAlertView.shareInstance.showAlert(message: "Loading...", alertType: .loading)
         getDeviceLocation()
         initCampusRangeFetchRequestForCheckIn()
     }
     
     @IBAction func onTouchCheckOutBtn(_ sender: Any) {
+        CustomAlertView.shareInstance.showAlert(message: "Loading...", alertType: .loading)
         getDeviceLocation()
         initCampusRangeFetchRequestForCheckOut()
         
@@ -72,12 +73,14 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     fileprivate func initCampusRangeFetchRequestForCheckIn() {
         DataFetcher.sharedInstance.fetchCampusRange() { [weak self] campusRanges in
             DispatchQueue.main.async {
+                CustomAlertView.shareInstance.hideAlert()
+                var distances : [Double] = []
                 for CampusRange in campusRanges {
                     print("campus ranges : ", CampusRange)
                     let distance = self?.getDistanceFromCampusRange(Range: CampusRange)
-                    self?.distances.append(distance ?? 0.0)
+                    distances.append(distance ?? 0.0)
                 }
-                let LocationInRange = self?.checkNearestCampus(distances: (self?.distances)!)
+                let LocationInRange = self?.checkNearestCampus(distances: distances, range: campusRanges)
                 self?.initCheckInFetchingRequest(locInRange: LocationInRange ?? false)
             }
         }
@@ -103,12 +106,14 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     fileprivate func initCampusRangeFetchRequestForCheckOut() {
         DataFetcher.sharedInstance.fetchCampusRange() { [weak self] campusRanges in
             DispatchQueue.main.async {
+                CustomAlertView.shareInstance.hideAlert()
+                var distances : [Double] = []
                 for CampusRange in campusRanges {
                     print("campus ranges : ", CampusRange)
                     let distance = self?.getDistanceFromCampusRange(Range: CampusRange)
-                    self?.distances.append(distance ?? 0.0)
+                    distances.append(distance ?? 0.0)
                 }
-                let LocationInRange = self?.checkNearestCampus(distances: (self?.distances)!)
+                let LocationInRange = self?.checkNearestCampus(distances: distances, range: campusRanges)
                 self?.initCheckOutFetchingRequest(locInRange: LocationInRange ?? false)
             }
         }
@@ -162,15 +167,16 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         
         let distance = self.locValue.distance(from: location)
         print("current loc : \(self.locValue)")
-        let distanceKM = distance/1000
-        print("distance between two coordinates : \(distanceKM)")
-        return distanceKM
+//        let distanceKM = distance/1000
+        print("distance between two coordinates : \(distance)")
+        return distance
     }
     
     //check distance is less than 1KM Range
-    fileprivate func checkNearestCampus(distances : [Double]) -> Bool {
-        for dist in distances {
-            if dist < 1.0 {
+    fileprivate func checkNearestCampus(distances : [Double], range : [CampusRangeResponse]) -> Bool {
+        for i in 0...distances.count - 1 {
+            let range = Double(range[i].range ?? Int(0.0))
+            if distances[i] <= range {
                 return true
             }
         }

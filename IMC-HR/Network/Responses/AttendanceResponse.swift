@@ -8,12 +8,15 @@
 
 import Foundation
 
-struct AttendanceResponse : Codable {
-    let date : String?
-    let arrivalTime : String?
-    let departureTime : String?
-    let leaveType : String?
-    let remark : String?
-    let attendanceStatus : String?
-    let holidayName : String?
+struct Attendance: Codable {
+    let staffAttendanceRep: [StaffAttendanceRep]
+    let monthlist: [String]
+}
+
+// MARK: - StaffAttendanceRep
+struct StaffAttendanceRep: Codable {
+    let date, arrivalTime, departureTime: String?
+    let leaveType: String?
+    let remark, attendanceStatus: String?
+    let holidayName: String?
 }

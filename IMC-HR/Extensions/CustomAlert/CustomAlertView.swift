@@ -59,7 +59,7 @@ class CustomAlertView: UIView {
         
         switch alertType {
         case .loading:
-            frontViewHeight.constant = 140
+            frontViewHeight.constant = 130
             //adding loading indicator
             if #available(iOS 13.0, *) {
                 loadingIndicator.style = .large
