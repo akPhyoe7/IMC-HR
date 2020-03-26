@@ -174,7 +174,7 @@ class DataFetcher {
         }.resume()
     }
     
-    func fetchDashboard (Completion : @escaping (DashboardResponse) -> Void) {
+    func fetchDashboard (Completion : @escaping (_ response: DashboardResponse?, _ error: Error?) -> Void) {
         let route = URL(string: Routes.Get.dashboard)!
         let headers : HTTPHeaders = [
             "auth" : KeychainWrapper.standard.string(forKey: "auth") ?? ""
@@ -182,16 +182,18 @@ class DataFetcher {
         AF.request(route,
                    method: .get,
                    headers: headers)
+            .validate()
             .responseJSON{ (response) in
                 switch response.result {
                 case .success(_):
                     if let result = try? JSONDecoder().decode(DashboardResponse.self, from: response.data!) {
-                        Completion(result)
+                        Completion(result, nil)
                     } else {
                         print("failed to decode data in dashboard")
                     }
                 case let .failure(error):
-                    print(error)
+                    print(error.localizedDescription)
+                    Completion(nil, error)
                 }
         }.resume()
     }

@@ -24,15 +24,15 @@ class AttendanceViewController: UIViewController {
     }
     
     private func customizeSC() {
-        self.scSelectMonth.backgroundColor = .clear
-        self.scSelectMonth.tintColor = .clear
+//        self.scSelectMonth.backgroundColor = .clear
+//        self.scSelectMonth.tintColor = .white
         self.scSelectMonth.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: UIColor.darkGray,
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)], for: .normal)
 
         // Change text color and the font of the selected segment
         self.scSelectMonth.setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor: UIColor(named: "BGPrimary") ?? UIColor.blue,
+            NSAttributedString.Key.foregroundColor: UIColor(named: "BGPrimary") ?? UIColor.darkGray,
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .semibold)], for: .selected)
         self.scSelectMonth.selectedSegmentIndex = 2
     }

@@ -9,6 +9,8 @@
 import UIKit
 import SDWebImage
 import CoreLocation
+import Alamofire
+import SwiftKeychainWrapper
 
 class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -185,11 +187,23 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     
     fileprivate func initDashboardFetchRequest() {
         CustomAlertView.shareInstance.showAlert(message: "Loading", alertType: .loading)
-        DataFetcher.sharedInstance.fetchDashboard() { [weak self] dashboardResponse in
-            DispatchQueue.main.async {
-                self?.dashboardData = dashboardResponse
-                //Bind data to View
-                self?.bindDashboardData(data: dashboardResponse)
+        DataFetcher.sharedInstance.fetchDashboard() { [weak self] (dashboardResponse, error) in
+            if let error = error as? AFError {
+                switch error{
+                case .responseValidationFailed(let reason):
+                    print("Response validation failed: \(error.localizedDescription)")
+                    print("Failure Reason: \(reason)")
+                    self?.ShowUnauthorizedErrorAlert()
+                default:
+                    print(error.localizedDescription)
+                    self?.ShowOtherErrorAlert(error.localizedDescription)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self?.dashboardData = dashboardResponse
+                    //Bind data to View
+                    self?.bindDashboardData(data: dashboardResponse!)
+                }
             }
         }
         CustomAlertView.shareInstance.hideAlert()
@@ -206,6 +220,31 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
         self.lblCasualDays.text = String(data.casualleave ?? 0)
         self.lblMedicalDays.text = String(data.medicalleave ?? 0)
         self.lblMaternityDays.text = String(data.maternityleave ?? 0)
+    }
+    
+    private func ShowUnauthorizedErrorAlert() {
+        let alert = UIAlertController(title: "Unauthorized!", message: "User sesstion was expired", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Retry Login", style: .destructive, handler: { (_) in
+            let removeKey: Bool = KeychainWrapper.standard.removeObject(forKey: "auth")
+                if removeKey{
+                    UserDefaults.standard.removeObject(forKey: "AccName")
+                    let rootViewController = UIStoryboard(name: "Login", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+                    let navigationController = UINavigationController(rootViewController: rootViewController!)
+                    UIApplication.shared.windows.first?.rootViewController = navigationController
+                    UIApplication.shared.windows.first?.makeKeyAndVisible()
+                }else{
+                    print("error in removing auth key")
+                }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func ShowOtherErrorAlert(_ errorString : String) {
+        let alert  = UIAlertController(title: "Error!", message: errorString, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     //MARK: -Setup CollectionView Layout
