@@ -171,8 +171,8 @@ class LeaveRequestViewController: UIViewController, UITextViewDelegate {
         }else if endDate == "" {
             self.showAndHideCustomAlert(msg: "must select end date")
         }else {
+            CustomAlertView.shareInstance.showAlert(message: "Loading", alertType: .loading)
             DataFetcher.sharedInstance.fetchLeaveRequest(leaveType: leaveType, startDate: startDate, endDate: endDate, reason: reason) { [weak self] status in
-                CustomAlertView.shareInstance.showAlert(message: "Loading", alertType: .loading)
                 DispatchQueue.main.async {
                     if status == "success" {
                         CustomAlertView.shareInstance.hideAlert()

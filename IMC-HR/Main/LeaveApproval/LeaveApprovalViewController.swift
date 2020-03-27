@@ -53,10 +53,10 @@ class LeaveApprovalViewController: UIViewController, ReloadFormCell {
         self.lblNotApprove.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0).isActive = true
     }
     
-    func updateTableView() {
-        self.leaveApprovalTableView.reloadData()
+    func UpdateTableView() {
+        self.leaveApprovalTableView.setContentOffset(.zero, animated: true)
+        self.initLeaveApprovalListFetchRequest()
     }
-    
 }
 
 extension LeaveApprovalViewController : UITableViewDataSource {
@@ -72,8 +72,9 @@ extension LeaveApprovalViewController : UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LeaveApprovalTableViewCell.identifier, for: indexPath) as? LeaveApprovalTableViewCell else {
             return UITableViewCell()
         }
+        cell.delegate = self
         cell.data = leaveList
-        return UITableViewCell()
+        return cell
     }
 }
 
@@ -84,7 +85,7 @@ extension LeaveApprovalViewController : UITableViewDelegate {
 }
 
 protocol ReloadFormCell: class {
-    func updateTableView()
+    func UpdateTableView()
 }
 
 class LeaveApprovalTableViewCell: UITableViewCell {
@@ -133,15 +134,15 @@ class LeaveApprovalTableViewCell: UITableViewCell {
             return
         }
         DataFetcher.sharedInstance.fetchLeaveApprove(leaveID: id) { [weak self] message in
-            if message == "success" {
-                CustomAlertView.shareInstance.showAlert(message: "Approve Success", alertType: .success)
-                self?.delegate?.updateTableView()
-            } else {
-                CustomAlertView.shareInstance.showAlert(message: "Approve Fail", alertType: .fail)
+            DispatchQueue.main.async {
+                if message == "success" {
+                    CustomAlertView.shareInstance.showAlert(message: "Approve Success", alertType: .success)
+                } else {
+                    CustomAlertView.shareInstance.showAlert(message: "Approve Fail", alertType: .fail)
+                }
+                self?.hideCustomAlert()
             }
         }
-        hideAlert()
-        ReloadTableView()
     }
     
     @IBAction func onTouchRejectBtn(_ sender: Any) {
@@ -149,28 +150,25 @@ class LeaveApprovalTableViewCell: UITableViewCell {
             return
         }
         DataFetcher.sharedInstance.fetchLeaveApprove(leaveID: id) { [weak self] message in
-            if message == "success" {
-                CustomAlertView.shareInstance.showAlert(message: "Reject Success", alertType: .success)
-                self?.delegate?.updateTableView()
-            } else {
-                CustomAlertView.shareInstance.showAlert(message: "Reject Fail", alertType: .fail)
+            DispatchQueue.main.async {
+                if message == "success" {
+                    CustomAlertView.shareInstance.showAlert(message: "Reject Success", alertType: .success)
+                } else {
+                    CustomAlertView.shareInstance.showAlert(message: "Reject Fail", alertType: .fail)
+                }
+                self?.hideCustomAlert()
             }
         }
-        hideAlert()
-        ReloadTableView()
     }
     
-    private func hideAlert() {
+    private func hideCustomAlert() {
         self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0), target: self, selector: #selector(self.timeExpired), userInfo: nil, repeats: false)
     }
     
     @objc func timeExpired() {
         timer.invalidate()
         CustomAlertView.shareInstance.hideAlert()
-    }
-    
-    private func ReloadTableView() {
-        delegate?.updateTableView()
+        self.delegate?.UpdateTableView()
     }
     
     static var identifier : String {
