@@ -35,7 +35,11 @@ class ProfileViewController: UIViewController {
         let photoUrl = data.photoUrl ?? ""
         self.imgProfile.sd_setImage(with: URL(string: photoUrl), placeholderImage: UIImage(named: "img_IMCLogo"))
         self.lblName.text = data.name
-        self.lblEmployeeId.text = String(data.id ?? 0)
+        var empID = String(data.employeeId ?? 0)
+        if empID == "0" {
+            empID = "-"
+        }
+        self.lblEmployeeId.text = empID
         self.lblDepartment.text = data.department1
         self.lblRole.text = data.jobTitle
         self.lblEmail.text = data.loginId

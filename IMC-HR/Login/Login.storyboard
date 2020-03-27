@@ -24,14 +24,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_IMCLogoBig" translatesAutoresizingMaskIntoConstraints="NO" id="Cry-u5-qLY">
-                                                <rect key="frame" x="114" y="83" width="147" height="146.5"/>
+                                                <rect key="frame" x="114" y="73" width="147" height="146.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="147" id="hJU-1h-Io7"/>
                                                     <constraint firstAttribute="height" constant="146.5" id="kCu-gb-hXn"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info Myanmar University" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adP-TC-1gh">
-                                                <rect key="frame" x="79" y="249.5" width="217.5" height="24"/>
+                                                <rect key="frame" x="79" y="239.5" width="217.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                 <color key="textColor" name="BGPrimary"/>
                                                 <nil key="highlightedColor"/>
@@ -93,7 +93,7 @@
                                             <constraint firstItem="pRl-xy-mAe" firstAttribute="trailing" secondItem="iH2-fD-KSB" secondAttribute="trailing" id="D9k-S9-hMY"/>
                                             <constraint firstItem="iH2-fD-KSB" firstAttribute="leading" secondItem="O1D-i6-JOH" secondAttribute="leading" id="FMi-FG-vCs"/>
                                             <constraint firstItem="adP-TC-1gh" firstAttribute="top" secondItem="Cry-u5-qLY" secondAttribute="bottom" constant="20" id="KAH-5d-RVg"/>
-                                            <constraint firstItem="fi3-0P-lHy" firstAttribute="top" secondItem="adP-TC-1gh" secondAttribute="bottom" constant="20" id="Wia-5n-A3L"/>
+                                            <constraint firstItem="fi3-0P-lHy" firstAttribute="top" secondItem="adP-TC-1gh" secondAttribute="bottom" constant="30" id="Wia-5n-A3L"/>
                                             <constraint firstItem="fi3-0P-lHy" firstAttribute="leading" secondItem="9pb-dz-c9u" secondAttribute="leading" constant="50" id="bZj-ZM-pSB"/>
                                             <constraint firstItem="pRl-xy-mAe" firstAttribute="centerY" secondItem="iH2-fD-KSB" secondAttribute="centerY" id="iCx-cv-5YS"/>
                                             <constraint firstItem="fi3-0P-lHy" firstAttribute="bottom" secondItem="9pb-dz-c9u" secondAttribute="centerY" id="ipT-b5-Lhh"/>

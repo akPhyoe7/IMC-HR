@@ -18,6 +18,7 @@ struct CampusRangeResponse : Codable {
 struct DashboardResponse : Codable {
     let id : Int?
     let name : String?
+    let employeeId : Int?
     let photoUrl : String?
     let jobTitle : String?
     let loginId : String?
