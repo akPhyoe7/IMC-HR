@@ -188,18 +188,18 @@ class DashboardViewController: UIViewController, CLLocationManagerDelegate {
     fileprivate func initDashboardFetchRequest() {
         CustomAlertView.shareInstance.showAlert(message: "Loading", alertType: .loading)
         DataFetcher.sharedInstance.fetchDashboard() { [weak self] (dashboardResponse, error) in
-            if let error = error as? AFError {
-                switch error{
-                case .responseValidationFailed(let reason):
-                    print("Response validation failed: \(error.localizedDescription)")
-                    print("Failure Reason: \(reason)")
-                    self?.ShowUnauthorizedErrorAlert()
-                default:
-                    print(error.localizedDescription)
-                    self?.ShowOtherErrorAlert(error.localizedDescription)
-                }
-            } else {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                if let error = error as? AFError {
+                    switch error{
+                    case .responseValidationFailed(let reason):
+                        print("Response validation failed: \(error.localizedDescription)")
+                        print("Failure Reason: \(reason)")
+                        self?.ShowUnauthorizedErrorAlert()
+                    default:
+                        print(error.localizedDescription)
+                        self?.ShowOtherErrorAlert(error.localizedDescription)
+                    }
+                } else {
                     self?.dashboardData = dashboardResponse
                     //Bind data to View
                     self?.bindDashboardData(data: dashboardResponse!)

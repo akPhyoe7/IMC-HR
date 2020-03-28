@@ -149,7 +149,7 @@ class LeaveApprovalTableViewCell: UITableViewCell {
         guard let id = data?.id else {
             return
         }
-        DataFetcher.sharedInstance.fetchLeaveApprove(leaveID: id) { [weak self] message in
+        DataFetcher.sharedInstance.fetchLeaveCancel(leaveID: id) { [weak self] message in
             DispatchQueue.main.async {
                 if message == "success" {
                     CustomAlertView.shareInstance.showAlert(message: "Reject Success", alertType: .success)
